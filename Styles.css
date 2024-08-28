@@ -1,0 +1,21 @@
+/* styles.css */
+.neon-section {
+    position: relative;
+    padding: 20px;
+    background: #111;
+    color: #fff;
+    text-align: center;
+    border: 2px solid #0ff;
+    overflow: hidden; /* Asegura que los rastros no salgan de la sección */
+    z-index: 1; /* Asegura que el contenido esté sobre los rastros */
+}
+
+.trail {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(2, 143, 168, 0.7);
+    pointer-events: none; /* Asegura que los rastros no interfieran con la interacción */
+    transform: translate(-50%, -50%);
+    z-index: 0; /* Coloca los rastros detrás del contenido */
+    transition: transform 0.1s, width 0.2s, height 0.2s, opacity 0.1s;
+}

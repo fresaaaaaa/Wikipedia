@@ -1,0 +1,302 @@
+<!DOCTYPE HTML>
+
+<html lang="es">
+	<head>
+		<title>Dibujo</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="assets/css/main.css" />
+
+	</head>
+	<body>
+        
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header-wrapper">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+
+								<header id="header">
+									<h1><a href="index.html" id="logo">Wikipedia</a></h1>
+									<nav id="nav">
+										<!--formulario de búsqueda -->
+                                        <form id="search-form">
+											<!-- Campo de entrada de búsqueda -->
+											<input type="search" id="search-input" placeholder="Buscar en Wikipedia...">
+											<!-- Botón de búsqueda -->
+											<button id="search-button">Buscar</button>
+										</form>
+		
+										<!-- Div para mostrar los resultados de búsqueda -->
+											<div id="search-results"></div>
+												
+												<style>
+													/* Estilos para la barra de búsqueda */
+	
+													#head-container {
+														display: flex;
+														flex-direction: row;
+														align-items: center;
+														padding: 10px;
+	
+													}
+	
+													#home-title{
+														margin-right: 10px;
+													}
+	
+													#search-form {
+														flex-grow: 1;
+														display: flex;
+														flex-direction: row;
+														align-items: center;
+														padding: 1px;
+														border: 1px solid #ccc;
+														border-radius: 2px;
+														box-shadow: 0 0 5px  rgba(101, 99, 99, 0.1);
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size:16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 10px;
+															}
+		
+															#search-input {
+																flex-grow: 1;
+																padding: 10px;
+																border: none;
+																border-radius: 5px;
+																font-size: 16px;
+																}
+		
+																#search-input {
+																flex-grow: 1;
+																padding: 10px;
+																border: none;
+																border-radius: 1px;
+																font-size: 16px;
+																}
+		
+																#search-button {
+																padding: 10px 15px;
+																border: none;
+																border-radius: 5px;
+																background-color: #1e9da4;
+																color: #fff;
+																cursor: context-menu;
+																}
+		
+																#search-button:hover {
+																background-color: #3e7b8e;
+																}
+		
+																#search-results {
+																padding: 10px;
+																}
+															
+		
+																</style>
+		
+																<script>
+																	// Obtener los elementos del formulario y el contenedor de resultados
+																	const searchForm = document.getElementById('search-form');
+																	const searchInput = document.getElementById('search-input');
+																	const searchButton = document.getElementById('search-button');
+																	const searchResults = document.getElementById('search-results');
+		
+		
+																 // Crear un objeto que mapee los temas con sus respectivas páginas
+																	const themePages = {
+																	'Arte': 'Arte.html',
+																	'Astronomia': 'Astronomía.html',
+																	'Dibujo': 'Dibujo.html',
+																	'Canto': 'Canto.html',
+																	'Musica': 'Musica.html',
+																	'Artes Plasticas': 'ArtesPlasticas.html',
+																	'Causas de guerra': 'causasGuerra.html',
+																	'Carrera sobre informatica': 'CarrerasInfo.html',
+																	'Concepto filosofico de las guerras': 'ConceptoFilosofico.html',
+																	'Benjamin Britten': 'benjaminBritten.html',
+																	'Biologia': 'Biologia.html',
+																	'Ciencias Naturales': 'CienciasNaturales.html',
+																	'Ciencias Sociales': 'cienciasSociales.html',
+																	'Doctrinas Politicas': 'DoctrinasPoliticas.html',
+																	'Economia': 'Economia.html',
+																	'Etimologia': 'EtimologiaPolitica.html',
+																	'Epistemologia de la geografia': 'Epistemologia.html',
+																	'Erizo': 'erizo.html',
+																	'Estudio de la religion': 'Estudio-de-la-Religion.html',
+																	'Zorro Fennec': 'Fennec.html',
+																	'Filosofia de la religion': 'Filosofia-de-la-Religion.html',
+																	'Filosofia de la historia': 'Filosofia-de-laHistoria.html',
+																	'Fisica': 'Fisica.html',
+																	'Francisco Morazan': 'Francisco-Morazan.html',
+																	'Funciones de la tecnologia': 'Funciones.html',
+																	'Funciones de la informatica': 'FuncionesInfo.html',
+																	'Geografia': 'Gegografia.html',
+																	'Geografia en sociales': 'geografia-de-sociales.html',
+																	'Geografia contemporanea': 'geografiaContemporanea.html',
+																	'Geografia general': 'GeografiaGeneral.html',
+																	'Geografia de Honduras': 'GeografiaHonduras.html',
+																	'Guerra de Israel y Gaza': 'Guerra-Israel-Gaza.html',
+																	'Guerras': 'guerras.html',
+																	'Guerras existentes': 'GuerrasHabidas.html',
+																	'Historia de Honduras': 'Historia-de-Honduras.html',
+																	'Historia': 'Historia.html',
+																	'Historiador': 'Historiador.html',
+																	'Historia de la informatica': 'HistoriaInfo.html',
+																	'Historia Politica': 'HistoriaPolitica.html',
+																	'Impacto de las guerras': 'Impacto.html',
+																	'Impacto de la tecnologia': 'impcto.html',
+																	'Informatica': 'Informatica.html',
+																	'Linguistica': 'Linguistica.html',
+																	'Listado de religiones': 'Lista-de-Religiones.html',
+																	'Metodos de la tecnologia': 'metodos.html',
+																	'Mike Cubbage': 'Mike-Cubbage.html',
+																	'Origenes de la informatica': 'OrigenesInfo.html',
+																	'Politica': 'Politica.html',
+																	'Psicologia': 'psicologia.html',
+																	'Quimica': 'Quimica.html',
+																	'Ramas de la historia': 'Ramas-de-la-Historia.html',
+																	'Religion': 'Religion.html',
+																	'Sistemas politicos': 'SistemasPoliticos.html',
+																	'Suricata': 'suricata.html',
+																	'Tecnologia': 'Tecnologia.html',
+																	'Tipos de religiones': 'Tipos-de-religion.html',
+																	'Tipos de tecnologias': 'Tipos-deTecnologia.html',
+	
+																	// Agregar más temas y páginas aquí
+																	//aquí es donde agregamos las paginas que queremos que el buscador encuentre
+																	};
+		
+																	// Agregar un evento de submit al formulario
+																	searchForm.addEventListener('submit', (e) => {
+																	e.preventDefault();
+																	const searchTerm = searchInput.value.trim();
+																	const page = themePages[searchTerm];
+																	if (page) {
+																	 // Redirigir a la página correspondiente
+																	window.location.href = page;
+																	} else {
+																  // Mostrar un mensaje de error si no se encuentra la página
+																	searchResults.innerHTML = "No se encontró una página para" ({searchTerm});
+																	}
+																});
+														</script>
+										
+
+		    <!-- Aqui podes poner el codigo para el buscador para que salga en la barra de arriba a la par de Home -->
+
+									</nav>
+								</header>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<!-- Main -->
+				<div id="main">
+					<div class="container">
+						<div class="row main-row">
+							<div class="col-3 col-12-medium">
+								<section>
+									<h2>Dato curioso</h2>
+									<p>En el idioma hawaiano, solo hay 13 letras en su alfabeto. El alfabeto hawaiano consta de 5 vocales (a, e, i, o, u) y 8 consonantes (h, k, l, m, n, p, r, w). Esta estructura simplificada contribuye a la musicalidad y fluidez del idioma, y también significa que las palabras hawaianas tienden a ser más cortas y rítmicas en comparación con otros idiomas.</p>
+								</section>
+
+                                <br>
+                                
+
+
+							</div>
+							<div class="col-6 col-12-medium imp-medium">
+
+								
+									<h2><strong>Linguistica</strong></h2>
+                                    <p>es el estudio científico del origen, la evolución y la estructura del lenguaje, a fin de deducir las leyes que rigen las lenguas (antiguas y modernas). Así, la lingüística estudia las estructuras fundamentales del lenguaje humano, sus variaciones a través de todas las familias de lenguas (las cuales también identifica y clasifica), y las condiciones que hacen posible la comprensión y la comunicación por medio de la lengua natural (esto último es particularmente cierto en el enfoque generativista).</p>
+                                    <p>Si bien la gramática es un estudio antiguo, el enfoque no tradicional de la lingüística moderna tiene varias fuentes. Una de las más importantes la constituyen los Neogrammatiker, que inauguraron la lingüística histórica e introdujeron la noción de ley en el contexto de la lingüística y que en particular formularon diversas leyes fonéticas para representar el cambio lingüístico. Otro punto importante son los términos de sincronía, diacronía y las nociones estructuralistas popularizadas por el trabajo de Ferdinand de Saussure y el Cours de linguistique générale (inspirado en sus lecciones)​ El siglo XX se considera, a partir del estructuralismo derivado de los trabajos de Saussure, el «punto de arranque» de la lingüística moderna.
+                                        A partir de esa época parece haberse generalizado el uso de la palabra «lingüística». La palabra «lingüista» se encuentra por primera vez en la página 1 del tomo I de la obra Choix des poésies des troubadours, ​ escrita en 1816 por Raynouard.</p>
+                                    <strong>Objetivo de la Linguistica</strong>
+                                    <p>El objetivo de la lingüística teórica es la construcción de una teoría general de la estructura de las lenguas naturales y del sistema cognitivo que la hace posible, es decir, las representaciones mentales abstractas que hace un hablante y que le permiten hacer uso del lenguaje.</p>
+                                    <p>El objetivo es describir las lenguas caracterizando el conocimiento tácito que los hablantes tienen de ellas y determinar cómo las adquieren estos. Ha existido cierta discusión sobre si la lingüística debe considerarse una ciencia social o más bien parte de la psicología. En las ciencias sociales la conciencia de los participantes es parte esencial en el proceso; sin embargo, la conciencia de los hablantes no parece desempeñar ningún papel relevante ni en el cambio lingüístico, ni en la estructura de las lenguas. Aunque ciertamente la conciencia del hablante sí tiene un papel en áreas incluidas normalmente dentro de la lingüística, como la sociolingüística o la psicolingüística, esas dos áreas no son el núcleo principal de la lingüística teórica sino disciplinas que estudian aspectos colaterales del uso del lenguaje.</p>
+                                    <p>El objetivo de la lingüística aplicada es el estudio de la adquisición del lenguaje y la aplicación del estudio científico de la lengua a una variedad de tareas básicas como la elaboración de métodos mejorados de enseñanza de idiomas. Existe un considerable debate sobre si la lingüística es una ciencia social, ya que solo los seres humanos usan las lenguas, o una ciencia natural porque, aunque es usada por los seres humanos, la intención de los hablantes no desempeña un papel importante en la evolución histórica de las lenguas ya que usan las estructuras lingüísticas de manera inconsciente. Esto fue estudiado por F. de Saussure, quien llegó a la conclusión de que los cambios de una lengua se producen arbitrariamente por variaciones involuntarias que realiza el sujeto, y que la lengua varía en la historia. Por eso plantea que el estudio de la lengua debe realizarse diacrónica y sincrónicamente. En consecuencia, Saussure deja a un lado la historia de las lenguas y las estudia sincrónicamente, en un momento dado del tiempo. En particular, Noam Chomsky señala que la lingüística debe ser considerada parte del ámbito de la ciencia cognitiva o la psicología humana, ya que la lingüística tiene más que ver con el funcionamiento del cerebro humano y su desarrollo evolutivo que con la organización social o las instituciones, que son el objeto de estudio de las ciencias sociales.</p>
+                                    </section>
+
+							</div>
+							<div class="col-3 col-12-medium">
+
+								<section>
+									<h2>Imagenes</h2>
+									<ul class="medium-image-list">
+										<li>
+											<a><img src="images/linguistica.jpeg" alt="300"  height="150" class="left" /></a>
+										</li>
+										<li>
+											<a><img src="images/linguistica2.jpeg" alt="300"  height="167" class="left" /></a>
+										</li>
+                                        <li>
+											<a><img src="images/linguistica3.jpeg" alt="300"  height="185" class="left" /></a>
+										</li>
+                                        <li>
+											<a><img src="images/linguistica4.jpeg" alt="300"  height="160" class="left" /></a>
+										</li>
+									</ul>
+								</section>
+								    <p>
+									<p>
+									<p>
+								    <p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			
+							</div>
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+            
+	</body>
+</html>

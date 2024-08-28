@@ -1,0 +1,329 @@
+<!DOCTYPE HTML>
+
+<html lang="es">
+	<style>
+        img {
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+        }
+
+        img:hover {
+            filter: grayscale(0%);
+        }
+    </style>
+	<head>
+		<title>Historia</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body>
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header-wrapper">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+
+								<header id="header">
+									<h1><a href="index.html" id="logo">Wikipedia</a></h1>
+									<nav id="nav">
+										<!--formulario de búsqueda -->
+                                        <form id="search-form">
+											<!-- Campo de entrada de búsqueda -->
+											<input type="search" id="search-input" placeholder="Buscar en Wikipedia...">
+											<!-- Botón de búsqueda -->
+											<button id="search-button">Buscar</button>
+										</form>
+		
+										<!-- Div para mostrar los resultados de búsqueda -->
+											<div id="search-results"></div>
+												
+												<style>
+													/* Estilos para la barra de búsqueda */
+	
+													#head-container {
+														display: flex;
+														flex-direction: row;
+														align-items: center;
+														padding: 10px;
+	
+													}
+	
+													#home-title{
+														margin-right: 10px;
+													}
+	
+													#search-form {
+														flex-grow: 1;
+														display: flex;
+														flex-direction: row;
+														align-items: center;
+														padding: 1px;
+														border: 1px solid #ccc;
+														border-radius: 2px;
+														box-shadow: 0 0 5px  rgba(101, 99, 99, 0.1);
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size:16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 10px;
+															}
+		
+															#search-input {
+																flex-grow: 1;
+																padding: 10px;
+																border: none;
+																border-radius: 5px;
+																font-size: 16px;
+																}
+		
+																#search-input {
+																flex-grow: 1;
+																padding: 10px;
+																border: none;
+																border-radius: 1px;
+																font-size: 16px;
+																}
+		
+																#search-button {
+																padding: 10px 15px;
+																border: none;
+																border-radius: 5px;
+																background-color: #1e9da4;
+																color: #fff;
+																cursor: context-menu;
+																}
+		
+																#search-button:hover {
+																background-color: #3e7b8e;
+																}
+		
+																#search-results {
+																padding: 10px;
+																}
+															
+		
+																</style>
+		
+																<script>
+																	// Obtener los elementos del formulario y el contenedor de resultados
+																	const searchForm = document.getElementById('search-form');
+																	const searchInput = document.getElementById('search-input');
+																	const searchButton = document.getElementById('search-button');
+																	const searchResults = document.getElementById('search-results');
+		
+		
+																 // Crear un objeto que mapee los temas con sus respectivas páginas
+																	const themePages = {
+																	'Arte': 'Arte.html',
+																	'Astronomia': 'Astronomía.html',
+																	'Dibujo': 'Dibujo.html',
+																	'Canto': 'Canto.html',
+																	'Musica': 'Musica.html',
+																	'Artes Plasticas': 'ArtesPlasticas.html',
+																	'Causas de guerra': 'causasGuerra.html',
+																	'Carrera sobre informatica': 'CarrerasInfo.html',
+																	'Concepto filosofico de las guerras': 'ConceptoFilosofico.html',
+																	'Benjamin Britten': 'benjaminBritten.html',
+																	'Biologia': 'Biologia.html',
+																	'Ciencias Naturales': 'CienciasNaturales.html',
+																	'Ciencias Sociales': 'cienciasSociales.html',
+																	'Doctrinas Politicas': 'DoctrinasPoliticas.html',
+																	'Economia': 'Economia.html',
+																	'Etimologia': 'EtimologiaPolitica.html',
+																	'Epistemologia de la geografia': 'Epistemologia.html',
+																	'Erizo': 'erizo.html',
+																	'Estudio de la religion': 'Estudio-de-la-Religion.html',
+																	'Zorro Fennec': 'Fennec.html',
+																	'Filosofia de la religion': 'Filosofia-de-la-Religion.html',
+																	'Filosofia de la historia': 'Filosofia-de-laHistoria.html',
+																	'Fisica': 'Fisica.html',
+																	'Francisco Morazan': 'Francisco-Morazan.html',
+																	'Funciones de la tecnologia': 'Funciones.html',
+																	'Funciones de la informatica': 'FuncionesInfo.html',
+																	'Geografia': 'Gegografia.html',
+																	'Geografia en sociales': 'geografia-de-sociales.html',
+																	'Geografia contemporanea': 'geografiaContemporanea.html',
+																	'Geografia general': 'GeografiaGeneral.html',
+																	'Geografia de Honduras': 'GeografiaHonduras.html',
+																	'Guerra de Israel y Gaza': 'Guerra-Israel-Gaza.html',
+																	'Guerras': 'guerras.html',
+																	'Guerras existentes': 'GuerrasHabidas.html',
+																	'Historia de Honduras': 'Historia-de-Honduras.html',
+																	'Historia': 'Historia.html',
+																	'Historiador': 'Historiador.html',
+																	'Historia de la informatica': 'HistoriaInfo.html',
+																	'Historia Politica': 'HistoriaPolitica.html',
+																	'Impacto de las guerras': 'Impacto.html',
+																	'Impacto de la tecnologia': 'impcto.html',
+																	'Informatica': 'Informatica.html',
+																	'Linguistica': 'Linguistica.html',
+																	'Listado de religiones': 'Lista-de-Religiones.html',
+																	'Metodos de la tecnologia': 'metodos.html',
+																	'Mike Cubbage': 'Mike-Cubbage.html',
+																	'Origenes de la informatica': 'OrigenesInfo.html',
+																	'Politica': 'Politica.html',
+																	'Psicologia': 'psicologia.html',
+																	'Quimica': 'Quimica.html',
+																	'Ramas de la historia': 'Ramas-de-la-Historia.html',
+																	'Religion': 'Religion.html',
+																	'Sistemas politicos': 'SistemasPoliticos.html',
+																	'Suricata': 'suricata.html',
+																	'Tecnologia': 'Tecnologia.html',
+																	'Tipos de religiones': 'Tipos-de-religion.html',
+																	'Tipos de tecnologias': 'Tipos-deTecnologia.html',
+	
+																	// Agregar más temas y páginas aquí
+																	//aquí es donde agregamos las paginas que queremos que el buscador encuentre
+																	};
+		
+																	// Agregar un evento de submit al formulario
+																	searchForm.addEventListener('submit', (e) => {
+																	e.preventDefault();
+																	const searchTerm = searchInput.value.trim();
+																	const page = themePages[searchTerm];
+																	if (page) {
+																	 // Redirigir a la página correspondiente
+																	window.location.href = page;
+																	} else {
+																  // Mostrar un mensaje de error si no se encuentra la página
+																	searchResults.innerHTML = "No se encontró una página para" ({searchTerm});
+																	}
+																});
+														</script>
+										
+
+		      <!-- Aqui podes poner el codigo para el buscador para que salga en la barra de arriba a la par de Home -->
+
+									</nav>
+								</header>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<!-- Main -->
+				<div id="main">
+					<div class="container">
+						<div class="row main-row">
+							<div class="col-3 col-12-medium">
+
+								<section>
+									<h2>Otros temas sobre la Historia</h2>
+									<ul class="link-list">
+										<li><a href="Ramas-de-la-Historia.html">Ramas de la Historia</a></li>
+										<li><a href="Historia-de-Honduras.html">Historia de Honduras</a></li>
+										<li><a href="Filosofia-de-laHistoria.html">Filosofia de la Historia</a></li>
+										<li><a href="Historiador.html">Historiador</a></li>
+									</ul>
+								</section>
+
+								<section>
+									<h2>Dato curioso</h2>
+									<p>El Imperio Romano construyó una extensa red de carreteras para conectar 
+                                       las ciudades y provincias de su vasto imperio, facilitando el comercio, 
+                                       la movilidad militar y la administración. Estas carreteras estaban 
+                                       increíblemente bien construidas, con capas de grava y piedra para 
+                                       asegurar durabilidad. Algunos tramos de estas antiguas rutas, como la 
+                                       Vía Appia en Italia, siguen siendo usados o han sido adaptados para el 
+                                       tráfico moderno. La durabilidad y diseño ingenioso de estas carreteras 
+                                       son testimonio de la habilidad de ingeniería romana.</p>
+								</section>
+
+							</div>
+							<div class="col-6 col-12-medium imp-medium">
+
+								<section class="middle-content">
+									<h2><strong>Historia</strong></h2>
+									<p>La historian.​ es la narración de los sucesos del pasado; generalmente los de la humanidad, aunque, también puede no estar centrada en el humano.n. 2​ Hay quien más breve y concisamente afirma que la historia es el conocimiento del pasado humano.2​3​4​ Asimismo, es una disciplina académica que estudia dichos acontecimientos. A la ciencia o disciplina académica también se le denomina historiografía para distinguirla de la historia entendida como los hechos objetivos sucedidos. Es una ciencia social debido a su clasificación y método; pero, si no se centra en el humano, puede ser considerada como una ciencia natural, especialmente en un marco de la interdisciplinariedad; de cualquier forma, forma parte de la clasificación de la ciencia que engloba las anteriores dos, es decir, una ciencia fáctica (también llamada factual).</p>
+                                    <p>Su propósito es averiguar los hechos y procesos que ocurrieron y se desarrollaron en el pasado e interpretarlos ateniéndose a criterios de la mayor objetividad posible; aunque la posibilidad de cumplimiento de tales propósitos y el grado en que sean posibles son en sí mismos objetos de estudio de la historiología o teoría de la historia, como epistemología o conocimiento científico de la historia.</p>
+                                    <p>Se denomina historiador o historiadora a la persona encargada del estudio de la historia. Al historiador profesional se le concibe como el especialista en la disciplina académica de la historia, y al historiador no profesional se le suele denominar cronista.</p>
+                                    <p>
+									<p>
+                                    <p>
+									<h1><strong>Etimología</strong></h1>
+									<p>
+									<p>La palabra historia deriva del griego ἱστορία (léase historia, traducible por «investigación» o «información», conocimiento adquirido por investigación), del verbo ἱστορεῖν («investigar»). De allí pasó al latín historia, que en castellano antiguo evolucionó a estoria (como atestigua el título de la Estoria de España de Alfonso X el Sabio, 1260-1284) y se reintrodujo posteriormente en el castellano como un cultismo en su forma latina original.</p>
+                                    <p>La etimología remota procede del protoindoeuropeo *wid-tor- (de la raíz *weid-, «saber, ver» —construcción hipotética—)6​ presente también en las palabras latinas idea o visión, en las germánicas wit, wise o wisdom, la sánscrita veda,7​ y las eslavas videti o vedati, y en otras lenguas de la familia indoeuropea.</p>
+                                    <p>La palabra antigua griega ἱστορία fue usada por Aristóteles en su Περὶ τὰ ζῷα ἱστορίαι (léase Peri ta zoa jistória, latinizado Historia animalium, traducible por Historia de los animales [el título griego es plural y el latino es singular]).9​ El término se derivaba de ἵστωρ (léase jístōr, traducible por «hombre sabio», «testigo» o «juez»). Se pueden encontrar usos de ἵστωρ en los himnos homéricos, Heráclito, el juramento de los efebos atenienses y en las inscripciones beocias (en un sentido legal, con un significado similar a «juez» o «testigo»). El rasgo aspirado es problemático, y no se presenta en la palabra cognata griega εἴδομαι («aparecer»). La forma ἱστορεῖν («inquirir»), es una derivación jónica, que se expandió primero en la Grecia clásica y más tarde en la civilización helenística.</p>
+                                    </section>
+
+							</div>
+							<div class="col-3 col-12-medium">
+
+								<section>
+									<h2>Imagenes</h2>
+									<ul class="medium-image-list">
+										<li>
+											<a><img src="images/Historia.jpg" alt=""  height="300" class="left" /></a>
+										</li>
+										<li>
+											<a><img src="images/Historia2.jpg" alt="" height="377" class="left" /></a>
+										</li>
+                                        <li>
+											<a><img src="images/historia3.jpg" alt="" height="450" class="left" /></a>
+										</li>
+                                        <li>
+											<a><img src="images/historia4.jpg" alt="" height="280" class="left" /></a>
+										</li>
+									</ul>
+								</section>
+								    <p>
+									<p>
+									<p>
+								    <p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			
+							</div>
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
+

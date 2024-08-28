@@ -1,0 +1,325 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Politica</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body>
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header-wrapper">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+
+								<header id="header">
+									<h1><a href="index.html" id="logo">Wikipedia</a></h1>
+									<nav id="nav">
+										<!--formulario de búsqueda -->
+                                        <form id="search-form">
+											<!-- Campo de entrada de búsqueda -->
+											<input type="search" id="search-input" placeholder="Buscar en Wikipedia...">
+											<!-- Botón de búsqueda -->
+											<button id="search-button">Buscar</button>
+										</form>
+		
+										<!-- Div para mostrar los resultados de búsqueda -->
+											<div id="search-results"></div>
+												
+												<style>
+													/* Estilos para la barra de búsqueda */
+	
+													#head-container {
+														display: flex;
+														flex-direction: row;
+														align-items: center;
+														padding: 10px;
+	
+													}
+	
+													#home-title{
+														margin-right: 10px;
+													}
+	
+													#search-form {
+														flex-grow: 1;
+														display: flex;
+														flex-direction: row;
+														align-items: center;
+														padding: 1px;
+														border: 1px solid #ccc;
+														border-radius: 2px;
+														box-shadow: 0 0 5px  rgba(101, 99, 99, 0.1);
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size:16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 10px;
+															}
+		
+															#search-input {
+																flex-grow: 1;
+																padding: 10px;
+																border: none;
+																border-radius: 5px;
+																font-size: 16px;
+																}
+		
+																#search-input {
+																flex-grow: 1;
+																padding: 10px;
+																border: none;
+																border-radius: 1px;
+																font-size: 16px;
+																}
+		
+																#search-button {
+																padding: 10px 15px;
+																border: none;
+																border-radius: 5px;
+																background-color: #1e9da4;
+																color: #fff;
+																cursor: context-menu;
+																}
+		
+																#search-button:hover {
+																background-color: #3e7b8e;
+																}
+		
+																#search-results {
+																padding: 10px;
+																}
+															
+		
+																</style>
+		
+																<script>
+																	// Obtener los elementos del formulario y el contenedor de resultados
+																	const searchForm = document.getElementById('search-form');
+																	const searchInput = document.getElementById('search-input');
+																	const searchButton = document.getElementById('search-button');
+																	const searchResults = document.getElementById('search-results');
+		
+		
+																 // Crear un objeto que mapee los temas con sus respectivas páginas
+																	const themePages = {
+																	'Arte': 'Arte.html',
+																	'Astronomia': 'Astronomía.html',
+																	'Dibujo': 'Dibujo.html',
+																	'Canto': 'Canto.html',
+																	'Musica': 'Musica.html',
+																	'Artes Plasticas': 'ArtesPlasticas.html',
+																	'Causas de guerra': 'causasGuerra.html',
+																	'Carrera sobre informatica': 'CarrerasInfo.html',
+																	'Concepto filosofico de las guerras': 'ConceptoFilosofico.html',
+																	'Benjamin Britten': 'benjaminBritten.html',
+																	'Biologia': 'Biologia.html',
+																	'Ciencias Naturales': 'CienciasNaturales.html',
+																	'Ciencias Sociales': 'cienciasSociales.html',
+																	'Doctrinas Politicas': 'DoctrinasPoliticas.html',
+																	'Economia': 'Economia.html',
+																	'Etimologia': 'EtimologiaPolitica.html',
+																	'Epistemologia de la geografia': 'Epistemologia.html',
+																	'Erizo': 'erizo.html',
+																	'Estudio de la religion': 'Estudio-de-la-Religion.html',
+																	'Zorro Fennec': 'Fennec.html',
+																	'Filosofia de la religion': 'Filosofia-de-la-Religion.html',
+																	'Filosofia de la historia': 'Filosofia-de-laHistoria.html',
+																	'Fisica': 'Fisica.html',
+																	'Francisco Morazan': 'Francisco-Morazan.html',
+																	'Funciones de la tecnologia': 'Funciones.html',
+																	'Funciones de la informatica': 'FuncionesInfo.html',
+																	'Geografia': 'Gegografia.html',
+																	'Geografia en sociales': 'geografia-de-sociales.html',
+																	'Geografia contemporanea': 'geografiaContemporanea.html',
+																	'Geografia general': 'GeografiaGeneral.html',
+																	'Geografia de Honduras': 'GeografiaHonduras.html',
+																	'Guerra de Israel y Gaza': 'Guerra-Israel-Gaza.html',
+																	'Guerras': 'guerras.html',
+																	'Guerras existentes': 'GuerrasHabidas.html',
+																	'Historia de Honduras': 'Historia-de-Honduras.html',
+																	'Historia': 'Historia.html',
+																	'Historiador': 'Historiador.html',
+																	'Historia de la informatica': 'HistoriaInfo.html',
+																	'Historia Politica': 'HistoriaPolitica.html',
+																	'Impacto de las guerras': 'Impacto.html',
+																	'Impacto de la tecnologia': 'impcto.html',
+																	'Informatica': 'Informatica.html',
+																	'Linguistica': 'Linguistica.html',
+																	'Listado de religiones': 'Lista-de-Religiones.html',
+																	'Metodos de la tecnologia': 'metodos.html',
+																	'Mike Cubbage': 'Mike-Cubbage.html',
+																	'Origenes de la informatica': 'OrigenesInfo.html',
+																	'Politica': 'Politica.html',
+																	'Psicologia': 'psicologia.html',
+																	'Quimica': 'Quimica.html',
+																	'Ramas de la historia': 'Ramas-de-la-Historia.html',
+																	'Religion': 'Religion.html',
+																	'Sistemas politicos': 'SistemasPoliticos.html',
+																	'Suricata': 'suricata.html',
+																	'Tecnologia': 'Tecnologia.html',
+																	'Tipos de religiones': 'Tipos-de-religion.html',
+																	'Tipos de tecnologias': 'Tipos-deTecnologia.html',
+	
+																	// Agregar más temas y páginas aquí
+																	//aquí es donde agregamos las paginas que queremos que el buscador encuentre
+																	};
+		
+																	// Agregar un evento de submit al formulario
+																	searchForm.addEventListener('submit', (e) => {
+																	e.preventDefault();
+																	const searchTerm = searchInput.value.trim();
+																	const page = themePages[searchTerm];
+																	if (page) {
+																	 // Redirigir a la página correspondiente
+																	window.location.href = page;
+																	} else {
+																  // Mostrar un mensaje de error si no se encuentra la página
+																	searchResults.innerHTML = "No se encontró una página para" ({searchTerm});
+																	}
+																});
+														</script>
+										
+
+		      <!-- Aqui podes poner el codigo para el buscador para que salga en la barra de arriba a la par de Home -->
+
+									</nav>
+								</header>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<!-- Main -->
+				<div id="main">
+					<div class="container">
+						<div class="row main-row">
+							<div class="col-3 col-12-medium">
+
+								<section>
+									<h2>Otros temas sobre la Politica</h2>
+									<ul class="link-list">
+										<li><a href="EtimologiaPolitica.html">Etimologia</a></li>
+										<li><a href="HistoriaPolitica.html">Historia</a></li>
+										<li><a href="SistemasPoliticos.html">Sistemas Politicos</a></li>
+										<li><a href="DosctrinasPoliticas.html">Doctrinas e Ideologias politicas</a></li>
+									</ul>
+								</section>
+
+								<section>
+									<h2>Dato curioso</h2>
+									<p>En 1993, el presidente de Nigeria, Sani Abacha, organizó un "festival 
+                                        de flores" en el que se plantaron miles de flores en la capital, 
+                                        Abuja. Sin embargo, el evento fue ampliamente criticado por ser una 
+                                        distracción de los problemas políticos y económicos graves que 
+                                        enfrentaba el país en ese momento. La extravagancia del festival 
+                                        contrastaba fuertemente con las difíciles condiciones que vivían 
+                                        muchos nigerianos, subrayando la desconexión entre el gobierno y la 
+                                        población.</p>
+								</section>
+
+							</div>
+							<div class="col-6 col-12-medium imp-medium">
+
+								<section class="middle-content">
+									<h2><strong>Politica</strong></h2>
+									<p>La política​ es el conjunto de actividades que se asocian con la toma de decisiones en grupo, u otras formas de relaciones de poder entre individuos, como la distribución de recursos o el estatus.1​ También es el arte, doctrina o práctica referente al gobierno de los Estados,2​ promoviendo la participación ciudadana al poseer la capacidad de distribuir y ejecutar el poder según sea necesario para garantizar el bien común en la sociedad.</p>
+                                    <p>Puede usarse positivamente en el contexto de una "solución política" que sea comprometedora y no violenta,3​ o descriptivamente como "el arte o la ciencia del gobierno", pero a menudo también tiene una connotación negativa.4​ Por ejemplo, el abolicionista Wendell Phillips declaró que "no jugamos a la política; la lucha contra la esclavitud no es una broma para nosotros".5​ El concepto se ha definido de diversas maneras, y los diferentes enfoques tienen puntos de vista fundamentalmente diferentes sobre si debe usarse de manera extensiva o limitada, empírica o normativa, y sobre si el conflicto o la cooperación son más esenciales para él. La política es la ciencia del poder y la capacidad de una persona o un grupo de personas de influir sobre la voluntad de los demás aun estando en contra de su propia voluntad.</p>
+                                    <p>En la política se implementan una variedad de métodos, que incluyen promover las propias opiniones políticas entre las personas, negociar con otros sujetos políticos, hacer leyes y ejercer la fuerza, incluida la guerra contra los adversarios.6​7​8​9​10​ La política se ejerce en una amplia gama de niveles sociales, desde clanes y tribus de sociedades tradicionales, pasando por gobiernos locales, empresas, instituciones modernas y estados soberanos, hasta el nivel internacional. En los estados nacionales modernos, la gente a menudo forma partidos políticos para representar sus ideas. Los miembros de un partido acuerdan adoptar la misma posición en muchos temas y aceptan apoyar proyectos de ley y sus líderes. Una elección suele ser una competencia entre diferentes partidos. Un sistema político es el marco que define métodos políticos aceptables dentro de una sociedad.</p>
+                                    <p>La ciencia política constituye una rama de las ciencias sociales que se ocupa de la actividad en virtud de la cual una sociedad, compuesta por seres humanos libres, resuelve los problemas que le plantea su convivencia colectiva.</p>
+                                    <p>
+                                    <p>
+                                    </section>
+
+							</div>
+							<div class="col-3 col-12-medium">
+
+								<section>
+									<h2>Imagenes</h2>
+									<ul class="medium-image-list">
+										<li>
+											<video width="" height="170" controls>
+												<source src="vid/maduro.mp4" type="video/mp4">
+												Tu navegador no es compatible con videos HTML5
+											</video>
+										</li>
+										<li>
+											<a><img src="images/politica3.jpg" alt="" class="left" /></a>
+										</li>
+										
+											<br>
+											<br>
+											<br>
+											<br>
+										
+										<li>
+											<video width="" height="545" controls>
+												<source src="vid/xiomara.mp4" type="video/mp4">
+												Tu navegador no es compatible con videos HTML5
+											</video>
+										</li>
+										<li>
+											<a><img src="images/politica2.jpg" alt="" height="393" class="left" /></a>
+										</li>
+										
+									</ul>
+								</section>
+								    <p>
+									<p>
+									<p>
+								    <p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			
+							</div>
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

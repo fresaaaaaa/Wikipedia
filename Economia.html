@@ -1,0 +1,308 @@
+<!DOCTYPE HTML>
+
+<html lang="es">
+	<head>
+		<title>Dibujo</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="assets/css/main.css" />
+
+	</head>
+	<body>
+        
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header-wrapper">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+
+								<header id="header">
+									<h1><a href="index.html" id="logo">Wikipedia</a></h1>
+									<nav id="nav">
+										<!--formulario de búsqueda -->
+                                        <form id="search-form">
+											<!-- Campo de entrada de búsqueda -->
+											<input type="search" id="search-input" placeholder="Buscar en Wikipedia...">
+											<!-- Botón de búsqueda -->
+											<button id="search-button">Buscar</button>
+										</form>
+		
+										<!-- Div para mostrar los resultados de búsqueda -->
+											<div id="search-results"></div>
+												
+												<style>
+													/* Estilos para la barra de búsqueda */
+	
+													#head-container {
+														display: flex;
+														flex-direction: row;
+														align-items: center;
+														padding: 10px;
+	
+													}
+	
+													#home-title{
+														margin-right: 10px;
+													}
+	
+													#search-form {
+														flex-grow: 1;
+														display: flex;
+														flex-direction: row;
+														align-items: center;
+														padding: 1px;
+														border: 1px solid #ccc;
+														border-radius: 2px;
+														box-shadow: 0 0 5px  rgba(101, 99, 99, 0.1);
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size:16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 10px;
+															}
+		
+															#search-input {
+																flex-grow: 1;
+																padding: 10px;
+																border: none;
+																border-radius: 5px;
+																font-size: 16px;
+																}
+		
+																#search-input {
+																flex-grow: 1;
+																padding: 10px;
+																border: none;
+																border-radius: 1px;
+																font-size: 16px;
+																}
+		
+																#search-button {
+																padding: 10px 15px;
+																border: none;
+																border-radius: 5px;
+																background-color: #1e9da4;
+																color: #fff;
+																cursor: context-menu;
+																}
+		
+																#search-button:hover {
+																background-color: #3e7b8e;
+																}
+		
+																#search-results {
+																padding: 10px;
+																}
+															
+		
+																</style>
+		
+																<script>
+																	// Obtener los elementos del formulario y el contenedor de resultados
+																	const searchForm = document.getElementById('search-form');
+																	const searchInput = document.getElementById('search-input');
+																	const searchButton = document.getElementById('search-button');
+																	const searchResults = document.getElementById('search-results');
+		
+		
+																 // Crear un objeto que mapee los temas con sus respectivas páginas
+																	const themePages = {
+																	'Arte': 'Arte.html',
+																	'Astronomia': 'Astronomía.html',
+																	'Dibujo': 'Dibujo.html',
+																	'Canto': 'Canto.html',
+																	'Musica': 'Musica.html',
+																	'Artes Plasticas': 'ArtesPlasticas.html',
+																	'Causas de guerra': 'causasGuerra.html',
+																	'Carrera sobre informatica': 'CarrerasInfo.html',
+																	'Concepto filosofico de las guerras': 'ConceptoFilosofico.html',
+																	'Benjamin Britten': 'benjaminBritten.html',
+																	'Biologia': 'Biologia.html',
+																	'Ciencias Naturales': 'CienciasNaturales.html',
+																	'Ciencias Sociales': 'cienciasSociales.html',
+																	'Doctrinas Politicas': 'DoctrinasPoliticas.html',
+																	'Economia': 'Economia.html',
+																	'Etimologia': 'EtimologiaPolitica.html',
+																	'Epistemologia de la geografia': 'Epistemologia.html',
+																	'Erizo': 'erizo.html',
+																	'Estudio de la religion': 'Estudio-de-la-Religion.html',
+																	'Zorro Fennec': 'Fennec.html',
+																	'Filosofia de la religion': 'Filosofia-de-la-Religion.html',
+																	'Filosofia de la historia': 'Filosofia-de-laHistoria.html',
+																	'Fisica': 'Fisica.html',
+																	'Francisco Morazan': 'Francisco-Morazan.html',
+																	'Funciones de la tecnologia': 'Funciones.html',
+																	'Funciones de la informatica': 'FuncionesInfo.html',
+																	'Geografia': 'Gegografia.html',
+																	'Geografia en sociales': 'geografia-de-sociales.html',
+																	'Geografia contemporanea': 'geografiaContemporanea.html',
+																	'Geografia general': 'GeografiaGeneral.html',
+																	'Geografia de Honduras': 'GeografiaHonduras.html',
+																	'Guerra de Israel y Gaza': 'Guerra-Israel-Gaza.html',
+																	'Guerras': 'guerras.html',
+																	'Guerras existentes': 'GuerrasHabidas.html',
+																	'Historia de Honduras': 'Historia-de-Honduras.html',
+																	'Historia': 'Historia.html',
+																	'Historiador': 'Historiador.html',
+																	'Historia de la informatica': 'HistoriaInfo.html',
+																	'Historia Politica': 'HistoriaPolitica.html',
+																	'Impacto de las guerras': 'Impacto.html',
+																	'Impacto de la tecnologia': 'impcto.html',
+																	'Informatica': 'Informatica.html',
+																	'Linguistica': 'Linguistica.html',
+																	'Listado de religiones': 'Lista-de-Religiones.html',
+																	'Metodos de la tecnologia': 'metodos.html',
+																	'Mike Cubbage': 'Mike-Cubbage.html',
+																	'Origenes de la informatica': 'OrigenesInfo.html',
+																	'Politica': 'Politica.html',
+																	'Psicologia': 'psicologia.html',
+																	'Quimica': 'Quimica.html',
+																	'Ramas de la historia': 'Ramas-de-la-Historia.html',
+																	'Religion': 'Religion.html',
+																	'Sistemas politicos': 'SistemasPoliticos.html',
+																	'Suricata': 'suricata.html',
+																	'Tecnologia': 'Tecnologia.html',
+																	'Tipos de religiones': 'Tipos-de-religion.html',
+																	'Tipos de tecnologias': 'Tipos-deTecnologia.html',
+	
+																	// Agregar más temas y páginas aquí
+																	//aquí es donde agregamos las paginas que queremos que el buscador encuentre
+																	};
+		
+																	// Agregar un evento de submit al formulario
+																	searchForm.addEventListener('submit', (e) => {
+																	e.preventDefault();
+																	const searchTerm = searchInput.value.trim();
+																	const page = themePages[searchTerm];
+																	if (page) {
+																	 // Redirigir a la página correspondiente
+																	window.location.href = page;
+																	} else {
+																  // Mostrar un mensaje de error si no se encuentra la página
+																	searchResults.innerHTML = "No se encontró una página para" ({searchTerm});
+																	}
+																});
+														</script>
+									
+
+		    <!-- Aqui podes poner el codigo para el buscador para que salga en la barra de arriba a la par de Home -->
+
+									</nav>
+								</header>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<!-- Main -->
+				<div id="main">
+					<div class="container">
+						<div class="row main-row">
+							<div class="col-3 col-12-medium">
+								<section>
+									<h2>Dato curioso</h2>
+									<p>La primera burbuja especulativa registrada en la historia es conocida como la "Burbuja de los Tulipanes". A mediados del siglo XVII en los Países Bajos, los precios de los bulbos de tulipán se dispararon a niveles exorbitantes debido a una especulación desenfrenada. En su punto máximo, algunos bulbos de tulipán costaban más que una casa en Ámsterdam. Sin embargo, en 1637, el mercado colapsó abruptamente y los precios cayeron drásticamente, dejando a muchos inversionistas en bancarrota. Esta burbuja es a menudo citada como el primer ejemplo documentado de una burbuja económica y es un caso clásico de especulación irracional en los mercados.</p>
+								</section>
+
+                                <br>
+                                
+
+
+							</div>
+							<div class="col-6 col-12-medium imp-medium">
+
+								
+									<h2><strong>Economia</strong></h2>
+                                    <p>La economia es un conjunto de actividades concernientes a la producción, distribución, comercio, y consumo de bienes y servicios por parte de los diferentes agentes económicos. La ciencia social encargada de su estudio científico es la ciencia económica y quienes la estudian son los economistas. En términos muy generales, se podría definir como 'un dominio social que enfatiza las prácticas, discursos y expresiones materiales asociadas con la producción, uso y manejo de recursos'. En un sentido amplio, la economía se refiere a la organización del uso de recursos escasos (limitado o finito) cuando se implementan para satisfacer las necesidades individuales o colectivas, por lo que es un sistema de interacciones que garantiza ese tipo de organización, también conocido como el sistema económico.</p>
+									<P>La Economía, en otras palabras, es el estudio de los modos de organización y distribución de los bienes escasos que cada sociedad requiere y por ende produce o adquiere mediante diferentes estrategias, de modo de satisfacer la mayor cantidad de demanda a partir de un número finito de bienes tangibles o intangibles. Dicho así, podríamos deducir que la Economía intenta comprender los procesos de producción y consumo de cualquier grupo humano, para aspirar a una ideal repartición y gerencia de los recursos. Esto le ha permitido aplicarse a diversas áreas de estudio y trabajar con otras disciplinas puntuales, como lo son el Derecho, la Administración, los negocios, la política, la guerra, la ciencia y un prolongado etcétera. Al mismo tiempo, la Economía echa mano a herramientas y procesos de diversas áreas del saber, como la psicología, la filosofía, la historia, etc. para ayudarse en su comprensión de las dinámicas económicas de las sociedades. Se trata de un saber multidisciplinario que data de los tiempos de la Antigüedad Clásica (sobre todo Aristóteles).</P>
+									<strong>Tipos de economia</strong>
+                                    <p>La Economía es una disciplina amplia y compleja, en la que pueden distinguirse numerosos tipos o clasificaciones, como son:</p>
+									<strong>-Economía teórica y economía empírica</strong>
+									<p>La primera persigue modelos racionales de funcionamiento y equilibrio económico para las distintas sociedades, mientras que la segunda confirma o refuta dichos modelos a través de su aplicación o de la historia económica de las naciones.</p>
+									<strong>-Microeconomía y Macroeconomía</strong>
+									<p>La primera hace alusión a las elecciones de los agentes económicos (individuos, empresas y gobiernos) de cara a la satisfacción de sus necesidades y la escasez. La segunda, en cambio, contempla la economía como un sistema nacional, cuando no global e internacional, que analiza los totales de la balanza comercial, las tendencias generales y los datos a un nivel panorámico.</p>
+									<strong>-Economía normativa y economía positiva</strong>
+									<p>Esta distinción se basa en que la primera contempla el deber ser de la economía, mientras que la segunda estudia el comportamiento económico como algo vivo y presente, cambiante</p>
+									<strong>-Economía ortodoxa y heterodoxa</strong>
+									<p>Una diferenciación de tipo académico, en el que la primera se afianza en la tríada racionalidad-individualismo-equilibrio y es la más comúnmente enseñada en las universidades, la tradicional; mientras la segunda engloba un conjunto diferente y heterogéneo de corrientes de análisis económico y prefiere el enfoque a partir de instituciones-historia-estructura social.</p>
+
+                                    </section>
+
+							</div>
+							<div class="col-3 col-12-medium">
+
+								<section>
+									<h2>Imagenes</h2>
+									<ul class="medium-image-list">
+										<li>
+											<a><img src="images/economia.jpeg" alt=""  height="190" class="left" /></a>
+										</li>
+										<li>
+											<a><img src="images/economía2.jpeg" alt=""  height="220" class="left" /></a>
+										</li>
+                                        <li>
+											<a><img src="images/economia3.jpeg" alt=""  height="307" class="left" /></a>
+										</li>
+										<li>
+											<a><img src="images/economia4.jpeg" alt=""  height="162" class="left" /></a>
+										</li>
+									</ul>
+								</section>
+								    <p>
+									<p>
+									<p>
+								    <p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			
+							</div>
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+            
+	</body>
+</html>

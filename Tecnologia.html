@@ -1,0 +1,320 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Tecnologia</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body>
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header-wrapper">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+
+								<header id="header">
+									<h1><a href="index.html" id="logo">Wikipedia</a></h1>
+									<nav id="nav">
+										<!--formulario de búsqueda -->
+                                        <form id="search-form">
+											<!-- Campo de entrada de búsqueda -->
+											<input type="search" id="search-input" placeholder="Buscar en Wikipedia...">
+											<!-- Botón de búsqueda -->
+											<button id="search-button">Buscar</button>
+										</form>
+		
+										<!-- Div para mostrar los resultados de búsqueda -->
+											<div id="search-results"></div>
+												
+												<style>
+													/* Estilos para la barra de búsqueda */
+	
+													#head-container {
+														display: flex;
+														flex-direction: row;
+														align-items: center;
+														padding: 10px;
+	
+													}
+	
+													#home-title{
+														margin-right: 10px;
+													}
+	
+													#search-form {
+														flex-grow: 1;
+														display: flex;
+														flex-direction: row;
+														align-items: center;
+														padding: 1px;
+														border: 1px solid #ccc;
+														border-radius: 2px;
+														box-shadow: 0 0 5px  rgba(101, 99, 99, 0.1);
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size:16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 10px;
+															}
+		
+															#search-input {
+																flex-grow: 1;
+																padding: 10px;
+																border: none;
+																border-radius: 5px;
+																font-size: 16px;
+																}
+		
+																#search-input {
+																flex-grow: 1;
+																padding: 10px;
+																border: none;
+																border-radius: 1px;
+																font-size: 16px;
+																}
+		
+																#search-button {
+																padding: 10px 15px;
+																border: none;
+																border-radius: 5px;
+																background-color: #1e9da4;
+																color: #fff;
+																cursor: context-menu;
+																}
+		
+																#search-button:hover {
+																background-color: #3e7b8e;
+																}
+		
+																#search-results {
+																padding: 10px;
+																}
+															
+		
+																</style>
+		
+																<script>
+																	// Obtener los elementos del formulario y el contenedor de resultados
+																	const searchForm = document.getElementById('search-form');
+																	const searchInput = document.getElementById('search-input');
+																	const searchButton = document.getElementById('search-button');
+																	const searchResults = document.getElementById('search-results');
+		
+		
+																 // Crear un objeto que mapee los temas con sus respectivas páginas
+																	const themePages = {
+																	'Arte': 'Arte.html',
+																	'Astronomia': 'Astronomía.html',
+																	'Dibujo': 'Dibujo.html',
+																	'Canto': 'Canto.html',
+																	'Musica': 'Musica.html',
+																	'Artes Plasticas': 'ArtesPlasticas.html',
+																	'Causas de guerra': 'causasGuerra.html',
+																	'Carrera sobre informatica': 'CarrerasInfo.html',
+																	'Concepto filosofico de las guerras': 'ConceptoFilosofico.html',
+																	'Benjamin Britten': 'benjaminBritten.html',
+																	'Biologia': 'Biologia.html',
+																	'Ciencias Naturales': 'CienciasNaturales.html',
+																	'Ciencias Sociales': 'cienciasSociales.html',
+																	'Doctrinas Politicas': 'DoctrinasPoliticas.html',
+																	'Economia': 'Economia.html',
+																	'Etimologia': 'EtimologiaPolitica.html',
+																	'Epistemologia de la geografia': 'Epistemologia.html',
+																	'Erizo': 'erizo.html',
+																	'Estudio de la religion': 'Estudio-de-la-Religion.html',
+																	'Zorro Fennec': 'Fennec.html',
+																	'Filosofia de la religion': 'Filosofia-de-la-Religion.html',
+																	'Filosofia de la historia': 'Filosofia-de-laHistoria.html',
+																	'Fisica': 'Fisica.html',
+																	'Francisco Morazan': 'Francisco-Morazan.html',
+																	'Funciones de la tecnologia': 'Funciones.html',
+																	'Funciones de la informatica': 'FuncionesInfo.html',
+																	'Geografia': 'Gegografia.html',
+																	'Geografia en sociales': 'geografia-de-sociales.html',
+																	'Geografia contemporanea': 'geografiaContemporanea.html',
+																	'Geografia general': 'GeografiaGeneral.html',
+																	'Geografia de Honduras': 'GeografiaHonduras.html',
+																	'Guerra de Israel y Gaza': 'Guerra-Israel-Gaza.html',
+																	'Guerras': 'guerras.html',
+																	'Guerras existentes': 'GuerrasHabidas.html',
+																	'Historia de Honduras': 'Historia-de-Honduras.html',
+																	'Historia': 'Historia.html',
+																	'Historiador': 'Historiador.html',
+																	'Historia de la informatica': 'HistoriaInfo.html',
+																	'Historia Politica': 'HistoriaPolitica.html',
+																	'Impacto de las guerras': 'Impacto.html',
+																	'Impacto de la tecnologia': 'impcto.html',
+																	'Informatica': 'Informatica.html',
+																	'Linguistica': 'Linguistica.html',
+																	'Listado de religiones': 'Lista-de-Religiones.html',
+																	'Metodos de la tecnologia': 'metodos.html',
+																	'Mike Cubbage': 'Mike-Cubbage.html',
+																	'Origenes de la informatica': 'OrigenesInfo.html',
+																	'Politica': 'Politica.html',
+																	'Psicologia': 'psicologia.html',
+																	'Quimica': 'Quimica.html',
+																	'Ramas de la historia': 'Ramas-de-la-Historia.html',
+																	'Religion': 'Religion.html',
+																	'Sistemas politicos': 'SistemasPoliticos.html',
+																	'Suricata': 'suricata.html',
+																	'Tecnologia': 'Tecnologia.html',
+																	'Tipos de religiones': 'Tipos-de-religion.html',
+																	'Tipos de tecnologias': 'Tipos-deTecnologia.html',
+	
+																	// Agregar más temas y páginas aquí
+																	//aquí es donde agregamos las paginas que queremos que el buscador encuentre
+																	};
+		
+																	// Agregar un evento de submit al formulario
+																	searchForm.addEventListener('submit', (e) => {
+																	e.preventDefault();
+																	const searchTerm = searchInput.value.trim();
+																	const page = themePages[searchTerm];
+																	if (page) {
+																	 // Redirigir a la página correspondiente
+																	window.location.href = page;
+																	} else {
+																  // Mostrar un mensaje de error si no se encuentra la página
+																	searchResults.innerHTML = "No se encontró una página para" ({searchTerm});
+																	}
+																});
+														</script>
+										
+
+		      <!-- Aqui podes poner el codigo para el buscador para que salga en la barra de arriba a la par de Home -->
+
+									</nav>
+								</header>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<!-- Main -->
+				<div id="main">
+					<div class="container">
+						<div class="row main-row">
+							<div class="col-3 col-12-medium">
+
+								<section>
+									<h2>Otros temas sobre la Tecnologia</h2>
+									<ul class="link-list">
+										<li><a href="Tipos-deTecnologia.html">Tipos de Tecnologia</a></li>
+										<li><a href="Funciones.html">Funciones</a></li>
+										<li><a href="impcto.html">Impacto</a></li>
+										<li><a href="metodos.html">Metodos</a></li>
+									</ul>
+								</section>
+
+								<section>
+									<h2>Dato curioso</h2>
+									<p>El primer "mouse" de computadora, inventado por Douglas Engelbart en 
+                                        1964, estaba hecho de madera. A diferencia de los modernos ratones de 
+                                        plástico que conocemos hoy, este primer prototipo era una caja de 
+                                        madera con una sola rueda de metal en la parte inferior para rastrear 
+                                        el movimiento sobre una superficie. A pesar de su apariencia 
+                                        rudimentaria, el mouse fue una innovación revolucionaria en la 
+                                        interfaz de usuario, facilitando la interacción con las computadoras 
+                                        personales. ¡Quién diría que un pedazo de madera podría ser tan 
+                                        significativo para la tecnología moderna!</p>
+								</section>
+
+							</div>
+							<div class="col-6 col-12-medium imp-medium">
+
+								<section class="middle-content">
+									<h2><strong>Tecnologia</strong></h2>
+									<p>La tecnología (del griego τέχνη téchnē, ‘arte’, ‘oficio’ y -λογία -loguía, ‘tratado’, ‘estudio’2​) es la suma de técnicas, habilidades, métodos y procesos utilizados en la producción de bienes o servicios o en el logro de objetivos, como la investigación científica. La tecnología puede ser el conocimiento de técnicas, procesos y similares, o puede integrarse en máquinas para permitir su funcionamiento sin un conocimiento detallado de su funcionamiento. Los sistemas (por ejemplo, máquinas) que aplican tecnología tomando una entrada, cambiándola de acuerdo con el uso del sistema y luego produciendo un resultado se denominan sistemas tecnológicos.</p>
+                                    <p>La tecnología tiene muchos efectos. Ha ayudado a desarrollar economías más avanzadas (incluida la economía global actual). Muchos procesos tecnológicos producen externalidades negativas como la contaminación y agotan los recursos naturales, en detrimento del planeta Tierra. Sin embargo, la tecnología también puede ser usada para proteger el medio ambiente, buscando soluciones para resolver de forma sostenible las crecientes necesidades de la sociedad, sin provocar un agotamiento o degradación de los recursos materiales y energéticos del planeta o aumentar las desigualdades sociales.</p>
+                                    <p>Las innovaciones influyen en los valores de cada sociedad y cuestiones éticas de la tecnología. Los ejemplos incluyen el surgimiento de la noción de eficiencia en términos de productividad humana y los desafíos de la bioética. El campo interdisciplinario de estudios de ciencia, tecnología y sociedad abarca tales efectos culturales, éticos y políticos.</p>
+                                    <p>Han surgido debates filosóficos sobre la tecnología, con desacuerdos sobre si la tecnología mejora o empeora la condición humana. El neoludismo, el anarco-primitivismo y movimientos similares critican la omnipresencia de la tecnología, argumentando que daña el medio ambiente y aliena a las personas. Los defensores de ideologías como el transhumanismo y el tecnoprogresismo ven el progreso tecnológico continuo como beneficioso para la sociedad y la condición humana.</p>
+									<p>
+                                    <p>
+									<h1><strong>Historia</strong></h1>
+									<p>
+									<p>La historia de la tecnología es la historia de la invención de herramientas y técnicas con un propósito práctico. Los artefactos tecnológicos son productos de una economía, una fuerza del crecimiento económico y una buena parte de la vida. Las innovaciones tecnológicas afectan y están afectadas por las tradiciones culturales de la sociedad. También son un medio de obtener poder .</p>
+                                    <p>La forma más simple de tecnología es el desarrollo y uso de herramientas básicas. La invención prehistórica de herramientas de piedra, seguida por el descubrimiento de cómo controlar el fuego, aumentaron las fuentes de alimento. La posterior Revolución Neolítica cuadruplicó el sustento disponible de un territorio. La invención de la rueda ayudó a los humanos a viajar y controlar su entorno.</p>
+                                    <p>La historia moderna está relacionada íntimamente con la historia de la ciencia, pues el número del descubrimiento de nuevos conocimientos ha permitido crear nuevas cosas y, recíprocamente, se han podido realizar nuevos descubrimientos científicos gracias al desarrollo de nuevas tecnologías, que han extendido las posibilidades de experimentación y adquisición del conocimiento.</p>
+                                    <p>Los desarrollos en tiempos históricos, incluida la imprenta, el teléfono e Internet, han reducido las barreras físicas a la comunicación y han permitido que los humanos interactúen libremente a escala global.</p>
+                                    
+                                </section>
+
+							</div>
+							<div class="col-3 col-12-medium">
+
+								<section>
+									<h2>Imagenes</h2>
+									<ul class="medium-image-list">
+										<li>
+											<a><img src="images/tecnologia.jpg" alt=""  height="300" class="left" /></a>
+										</li>
+										<li>
+											<a><img src="images/tecnologia2.jpg" alt="" height="250" class="left" /></a>
+										</li>
+                                        <li>
+											<a><img src="images/tecnologia3.jpg" alt="" height="249" class="left" /></a>
+										</li>
+                                        <li>
+											<a><img src="images/tecnologia4.jpg" alt="" height="167" class="left" /></a>
+										</li>
+									</ul>
+								</section>
+								    <p>
+									<p>
+									<p>
+								    <p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			
+							</div>
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

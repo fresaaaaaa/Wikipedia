@@ -1,0 +1,390 @@
+<!DOCTYPE HTML>
+
+<html lang="es">
+
+
+<style>
+   .color-generator {
+            text-align: center;
+        }
+
+        #generatePalette {
+            background: linear-gradient(45deg, #00ccff, #95e492); /* Gradiente de colores */
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        #generatePalette:hover {
+            background: linear-gradient(45deg, #00ccff, #95e492); /* Gradiente más oscuro al pasar el cursor */
+            transform: scale(1.05);
+        }
+
+        .palette {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .color-box {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            border: 2px solid #ddd;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .color-box:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+
+
+
+	<head>
+		<title>Artes Plasticas</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body>
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header-wrapper">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+
+								<header id="header">
+									<h1><a href="index.html" id="logo">Wikipedia</a></h1>
+									<nav id="nav">
+                                        <!--formulario de búsqueda -->
+                                        <form id="search-form">
+                                            <!-- Campo de entrada de búsqueda -->
+                                            <input type="search" id="search-input" placeholder="Buscar en Wikipedia...">
+                                            <!-- Botón de búsqueda -->
+                                            <button id="search-button">Buscar</button>
+                                        </form>
+        
+                                        <!-- Div para mostrar los resultados de búsqueda -->
+                                            <div id="search-results"></div>
+                                                
+                                                <style>
+                                                    /* Estilos para la barra de búsqueda */
+    
+                                                    #head-container {
+                                                        display: flex;
+                                                        flex-direction: row;
+                                                        align-items: center;
+                                                        padding: 10px;
+    
+                                                    }
+    
+                                                    #home-title{
+                                                        margin-right: 10px;
+                                                    }
+    
+                                                    #search-form {
+                                                        flex-grow: 1;
+                                                        display: flex;
+                                                        flex-direction: row;
+                                                        align-items: center;
+                                                        padding: 1px;
+                                                        border: 1px solid #ccc;
+                                                        border-radius: 2px;
+                                                        box-shadow: 0 0 5px  rgba(101, 99, 99, 0.1);
+                                                        }
+        
+                                                        #search-input {
+                                                            flex-grow: 1;
+                                                            padding: 10px;
+                                                            border: none;
+                                                            border-radius: 5px;
+                                                            font-size: 16px;
+                                                        }
+        
+                                                        #search-input {
+                                                            flex-grow: 1;
+                                                            padding: 10px;
+                                                            border: none;
+                                                            border-radius: 5px;
+                                                            font-size: 16px;
+                                                        }
+        
+                                                        #search-input {
+                                                            flex-grow: 1;
+                                                            padding: 10px;
+                                                            border: none;
+                                                            border-radius: 5px;
+                                                            font-size:16px;
+                                                        }
+        
+                                                        #search-input {
+                                                            flex-grow: 1;
+                                                            padding: 10px;
+                                                            border: none;
+                                                            border-radius: 5px;
+                                                            font-size: 10px;
+                                                            }
+        
+                                                            #search-input {
+                                                                flex-grow: 1;
+                                                                padding: 10px;
+                                                                border: none;
+                                                                border-radius: 5px;
+                                                                font-size: 16px;
+                                                                }
+        
+                                                                #search-input {
+                                                                flex-grow: 1;
+                                                                padding: 10px;
+                                                                border: none;
+                                                                border-radius: 1px;
+                                                                font-size: 16px;
+                                                                }
+        
+                                                                #search-button {
+                                                                padding: 10px 15px;
+                                                                border: none;
+                                                                border-radius: 5px;
+                                                                background-color: #1e9da4;
+                                                                color: #fff;
+                                                                cursor: context-menu;
+                                                                }
+        
+                                                                #search-button:hover {
+                                                                background-color: #3e7b8e;
+                                                                }
+        
+                                                                #search-results {
+                                                                padding: 10px;
+                                                                }
+                                                            
+        
+                                                                </style>
+        
+                                                                <script>
+                                                                    // Obtener los elementos del formulario y el contenedor de resultados
+                                                                    const searchForm = document.getElementById('search-form');
+                                                                    const searchInput = document.getElementById('search-input');
+                                                                    const searchButton = document.getElementById('search-button');
+                                                                    const searchResults = document.getElementById('search-results');
+        
+        
+                                                                 // Crear un objeto que mapee los temas con sus respectivas páginas
+                                                                    const themePages = {
+                                                                    'Arte': 'Arte.html',
+                                                                    'Astronomia': 'Astronomía.html',
+                                                                    'Dibujo': 'Dibujo.html',
+                                                                    'Canto': 'Canto.html',
+                                                                    'Musica': 'Musica.html',
+                                                                    'Artes Plasticas': 'ArtesPlasticas.html',
+                                                                    'Causas de guerra': 'causasGuerra.html',
+                                                                    'Carrera sobre informatica': 'CarrerasInfo.html',
+                                                                    'Concepto filosofico de las guerras': 'ConceptoFilosofico.html',
+                                                                    'Benjamin Britten': 'benjaminBritten.html',
+                                                                    'Biologia': 'Biologia.html',
+                                                                    'Ciencias Naturales': 'CienciasNaturales.html',
+                                                                    'Ciencias Sociales': 'cienciasSociales.html',
+                                                                    'Doctrinas Politicas': 'DoctrinasPoliticas.html',
+                                                                    'Economia': 'Economia.html',
+                                                                    'Etimologia': 'EtimologiaPolitica.html',
+                                                                    'Epistemologia de la geografia': 'Epistemologia.html',
+                                                                    'Erizo': 'erizo.html',
+                                                                    'Estudio de la religion': 'Estudio-de-la-Religion.html',
+                                                                    'Zorro Fennec': 'Fennec.html',
+                                                                    'Filosofia de la religion': 'Filosofia-de-la-Religion.html',
+                                                                    'Filosofia de la historia': 'Filosofia-de-laHistoria.html',
+                                                                    'Fisica': 'Fisica.html',
+                                                                    'Francisco Morazan': 'Francisco-Morazan.html',
+                                                                    'Funciones de la tecnologia': 'Funciones.html',
+                                                                    'Funciones de la informatica': 'FuncionesInfo.html',
+                                                                    'Geografia': 'Gegografia.html',
+                                                                    'Geografia en sociales': 'geografia-de-sociales.html',
+                                                                    'Geografia contemporanea': 'geografiaContemporanea.html',
+                                                                    'Geografia general': 'GeografiaGeneral.html',
+                                                                    'Geografia de Honduras': 'GeografiaHonduras.html',
+                                                                    'Guerra de Israel y Gaza': 'Guerra-Israel-Gaza.html',
+                                                                    'Guerras': 'guerras.html',
+                                                                    'Guerras existentes': 'GuerrasHabidas.html',
+                                                                    'Historia de Honduras': 'Historia-de-Honduras.html',
+                                                                    'Historia': 'Historia.html',
+                                                                    'Historiador': 'Historiador.html',
+                                                                    'Historia de la informatica': 'HistoriaInfo.html',
+                                                                    'Historia Politica': 'HistoriaPolitica.html',
+                                                                    'Impacto de las guerras': 'Impacto.html',
+                                                                    'Impacto de la tecnologia': 'impcto.html',
+                                                                    'Informatica': 'Informatica.html',
+                                                                    'Linguistica': 'Linguistica.html',
+                                                                    'Listado de religiones': 'Lista-de-Religiones.html',
+                                                                    'Metodos de la tecnologia': 'metodos.html',
+                                                                    'Mike Cubbage': 'Mike-Cubbage.html',
+                                                                    'Origenes de la informatica': 'OrigenesInfo.html',
+                                                                    'Politica': 'Politica.html',
+                                                                    'Psicologia': 'psicologia.html',
+                                                                    'Quimica': 'Quimica.html',
+                                                                    'Ramas de la historia': 'Ramas-de-la-Historia.html',
+                                                                    'Religion': 'Religion.html',
+                                                                    'Sistemas politicos': 'SistemasPoliticos.html',
+                                                                    'Suricata': 'suricata.html',
+                                                                    'Tecnologia': 'Tecnologia.html',
+                                                                    'Tipos de religiones': 'Tipos-de-religion.html',
+                                                                    'Tipos de tecnologias': 'Tipos-deTecnologia.html',
+    
+                                                                    // Agregar más temas y páginas aquí
+                                                                    //aquí es donde agregamos las paginas que queremos que el buscador encuentre
+                                                                    };
+        
+                                                                    // Agregar un evento de submit al formulario
+                                                                    searchForm.addEventListener('submit', (e) => {
+                                                                    e.preventDefault();
+                                                                    const searchTerm = searchInput.value.trim();
+                                                                    const page = themePages[searchTerm];
+                                                                    if (page) {
+                                                                     // Redirigir a la página correspondiente
+                                                                    window.location.href = page;
+                                                                    } else {
+                                                                  // Mostrar un mensaje de error si no se encuentra la página
+                                                                    searchResults.innerHTML = "No se encontró una página para" ({searchTerm});
+                                                                    }
+                                                                });
+                                                        </script>
+										
+
+		      <!-- Aqui podes poner el codigo para el buscador para que salga en la barra de arriba a la par de Home -->
+
+									</nav>
+								</header>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<!-- Main -->
+				<div id="main">
+					<div class="container">
+						<div class="row main-row">
+							<div class="col-3 col-12-medium">
+
+
+								<section>
+									<h2>Dato curioso</h2>
+									<p>Las pinturas más antiguas conocidas son las de la Cueva de Chauvet en 
+                                        Francia.</p>
+                                    <p>Descubiertas en 1994, estas pinturas rupestres tienen una antigüedad de
+                                        alrededor de 36,000 años. Las imágenes en las paredes de la cueva 
+                                        representan animales como leones, bisontes y osos, y son notablemente 
+                                        detalladas y realistas. Estas pinturas son un testimonio impresionante 
+                                        de la habilidad artística y la vida de los primeros seres humanos, 
+                                        mostrando que el deseo de expresarse a través del arte es una 
+                                        característica profundamente arraigada en la historia humana.</p>
+								</section>
+
+
+                                <div class="color-generator">
+                                    <button id="generatePalette">Genera tu paleta de colores</button>
+                                    <div id="palette" class="palette"></div>
+                                </div>
+
+                                <script>
+                                    // JavaScript para generar paletas de colores más variadas
+                                    function generateColor() {
+                                        // Genera un color aleatorio en formato hexadecimal
+                                        return `#${Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0')}`;
+                                    }
+                            
+                                    function generatePalette() {
+                                        const palette = document.getElementById('palette');
+                                        palette.innerHTML = ''; // Limpia la paleta actual
+                            
+                                        // Genera 5 colores aleatorios
+                                        const colors = Array.from({ length: 5 }, generateColor);
+                            
+                                        // Añade los colores a la paleta
+                                        colors.forEach(color => {
+                                            const colorBox = document.createElement('div');
+                                            colorBox.className = 'color-box';
+                                            colorBox.style.backgroundColor = color;
+                                            palette.appendChild(colorBox);
+                                        });
+                                    }
+                            
+                                    document.getElementById('generatePalette').addEventListener('click', generatePalette);
+                                </script>
+
+
+
+							</div>
+							<div class="col-6 col-12-medium imp-medium">
+
+								<section class="middle-content">
+									<h2><strong>Artes Plasticas</strong></h2>
+									<p>Las artes plásticas son aquellas artes que utilizan materiales capaces de ser modificados o moldeados por el artista mediante distintas técnicas para crear una obra. Son aquellas obras del ser humano que reflejan, con recursos plásticos, algún producto de su imaginación o su visión de la realidad.1​2​ Se refiere el término de manera más amplia a las artes visuales para diferenciarlas del arte musical, de la danza, la literatura o del teatro.</p>
+									<p>Incluidas dentro de las bellas artes,3​ el término 'artes plásticas' aparece a principios del siglo XIX para referirse a la pintura, la escultura, el dibujo, la arquitectura, el grabado, la cerámica, la orfebrería, la artesanía y la pintura mural.</p>
+									<p>
+                                    <h1><strong>Los conceptos de artes plásticas y artes visuales</strong></h1>
+                                    <p>  
+                                    <p>
+                                    <p>A partir de los movimientos artísticos que se fueron desarrollando durante el siglo XX, el concepto de artes plásticas comenzó a cambiar. Nuevas propuestas artísticas como el ready-made (arte encontrado) hicieron cuestionar si es necesario modificar un u otro material para obtener una obra de arte. A mediados del siglo XX se comenzó a utilizar el término artes visuales, que engloba el de artes plásticas y todos los nuevos medios. Las artes visuales añaden otros recursos como puede ser el sonido, el vídeo, la informática, la electrónica, etc., para crear obras o propuestas artísticas.</p>
+								    <h1><strong>Conceptos en artes plásticas</strong></h1>
+                                    <p>
+                                    <p>
+                                    <p>El artista plástico es la persona que se dedica profesionalmente al desarrollo de este tipo de arte. En algunos casos el artista se vale de varias disciplinas artísticas a la vez. Esto ocurre porque el artista aplica sus conocimientos para realizar sus obras con diferentes materiales, medios, técnicas y objetivos.</p>
+								    <p>Tradicionalmente, las escuelas de arte ofrecen al estudiante, para que desarrolle su potencial creativo, la posibilidad de trabajar varias disciplinas artísticas e incrementar su creatividad. Esto es posible porque las artes plásticas parten de principios y conceptos comunes a todas las disciplinas artísticas, como son: los elementos del diseño, las teorías del color y su psicología.</p>
+                                </section>
+
+							</div>
+							<div class="col-3 col-12-medium">
+
+								<section>
+									<h2>Imagenes</h2>
+									<ul class="medium-image-list">
+										<li>
+											<a><img src="images/artesPlasticas.jpg" alt="" height="300" class="left" /></a>
+										</li>
+										<li>
+											<a><img src="images/artesPlasticas2.jpg" alt="" height="460" class="left" /></a>
+										</li>
+                                        <li>
+											<a><img src="images/artesPlasticas3.jpg" alt="" height="448" class="left" /></a>
+										</li>
+									</ul>
+								</section>
+								    <p>
+									<p>
+									<p>
+								    <p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			
+							</div>
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

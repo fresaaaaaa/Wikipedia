@@ -1,0 +1,465 @@
+<!DOCTYPE HTML>
+
+<html lang="es">
+
+
+<style>
+    #map {
+      height: 500px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      margin: 15px;
+      padding: 20px;
+      transition: transform 0.3s ease;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card img {
+      max-width: 100%;
+      border-radius: 5px;
+    }
+    .card-title {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+    .card-content {
+      font-size: 1em;
+    }
+  </style>
+
+
+
+	<head>
+		<title>Ramas de la Historia</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="assets/css/main.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+	</head>
+	<body>
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header-wrapper">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+
+								<header id="header">
+									<h1><a href="index.html" id="logo">Wikipedia</a></h1>
+									<nav id="nav">
+                    <!--formulario de búsqueda -->
+                    <form id="search-form">
+                      <!-- Campo de entrada de búsqueda -->
+                      <input type="search" id="search-input" placeholder="Buscar en Wikipedia...">
+                      <!-- Botón de búsqueda -->
+                      <button id="search-button">Buscar</button>
+                  </form>
+
+                <!-- Div para mostrar los resultados de búsqueda -->
+                  <div id="search-results"></div>
+        
+        <style>
+          /* Estilos para la barra de búsqueda */
+
+          #head-container {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 10px;
+
+          }
+
+          #home-title{
+            margin-right: 10px;
+          }
+
+          #search-form {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 1px;
+            border: 1px solid #ccc;
+            border-radius: 2px;
+            box-shadow: 0 0 5px  rgba(101, 99, 99, 0.1);
+            }
+
+            #search-input {
+              flex-grow: 1;
+              padding: 10px;
+              border: none;
+              border-radius: 5px;
+              font-size: 16px;
+            }
+
+            #search-input {
+              flex-grow: 1;
+              padding: 10px;
+              border: none;
+              border-radius: 5px;
+              font-size: 16px;
+            }
+
+            #search-input {
+              flex-grow: 1;
+              padding: 10px;
+              border: none;
+              border-radius: 5px;
+              font-size:16px;
+            }
+
+            #search-input {
+              flex-grow: 1;
+              padding: 10px;
+              border: none;
+              border-radius: 5px;
+              font-size: 10px;
+              }
+
+              #search-input {
+                flex-grow: 1;
+                padding: 10px;
+                border: none;
+                border-radius: 5px;
+                font-size: 16px;
+                }
+
+                #search-input {
+                flex-grow: 1;
+                padding: 10px;
+                border: none;
+                border-radius: 1px;
+                font-size: 16px;
+                }
+
+                #search-button {
+                padding: 10px 15px;
+                border: none;
+                border-radius: 5px;
+                background-color: #1e9da4;
+                color: #fff;
+                cursor: context-menu;
+                }
+
+                #search-button:hover {
+                background-color: #3e7b8e;
+                }
+
+                #search-results {
+                padding: 10px;
+                }
+              
+
+                </style>
+
+                <script>
+                  // Obtener los elementos del formulario y el contenedor de resultados
+                  const searchForm = document.getElementById('search-form');
+                  const searchInput = document.getElementById('search-input');
+                  const searchButton = document.getElementById('search-button');
+                  const searchResults = document.getElementById('search-results');
+
+
+                 // Crear un objeto que mapee los temas con sus respectivas páginas
+                  const themePages = {
+                  'Arte': 'Arte.html',
+                  'Astronomia': 'Astronomía.html',
+                  'Dibujo': 'Dibujo.html',
+                  'Canto': 'Canto.html',
+                  'Musica': 'Musica.html',
+                  'Artes Plasticas': 'ArtesPlasticas.html',
+                  'Causas de guerra': 'causasGuerra.html',
+                  'Carrera sobre informatica': 'CarrerasInfo.html',
+                  'Concepto filosofico de las guerras': 'ConceptoFilosofico.html',
+                  'Benjamin Britten': 'benjaminBritten.html',
+                  'Biologia': 'Biologia.html',
+                  'Ciencias Naturales': 'CienciasNaturales.html',
+                  'Ciencias Sociales': 'cienciasSociales.html',
+                  'Doctrinas Politicas': 'DoctrinasPoliticas.html',
+                  'Economia': 'Economia.html',
+                  'Etimologia': 'EtimologiaPolitica.html',
+                  'Epistemologia de la geografia': 'Epistemologia.html',
+                  'Erizo': 'erizo.html',
+                  'Estudio de la religion': 'Estudio-de-la-Religion.html',
+                  'Zorro Fennec': 'Fennec.html',
+                  'Filosofia de la religion': 'Filosofia-de-la-Religion.html',
+                  'Filosofia de la historia': 'Filosofia-de-laHistoria.html',
+                  'Fisica': 'Fisica.html',
+                  'Francisco Morazan': 'Francisco-Morazan.html',
+                  'Funciones de la tecnologia': 'Funciones.html',
+                  'Funciones de la informatica': 'FuncionesInfo.html',
+                  'Geografia': 'Gegografia.html',
+                  'Geografia en sociales': 'geografia-de-sociales.html',
+                  'Geografia contemporanea': 'geografiaContemporanea.html',
+                  'Geografia general': 'GeografiaGeneral.html',
+                  'Geografia de Honduras': 'GeografiaHonduras.html',
+                  'Guerra de Israel y Gaza': 'Guerra-Israel-Gaza.html',
+                  'Guerras': 'guerras.html',
+                  'Guerras existentes': 'GuerrasHabidas.html',
+                  'Historia de Honduras': 'Historia-de-Honduras.html',
+                  'Historia': 'Historia.html',
+                  'Historiador': 'Historiador.html',
+                  'Historia de la informatica': 'HistoriaInfo.html',
+                  'Historia Politica': 'HistoriaPolitica.html',
+                  'Impacto de las guerras': 'Impacto.html',
+                  'Impacto de la tecnologia': 'impcto.html',
+                  'Informatica': 'Informatica.html',
+                  'Linguistica': 'Linguistica.html',
+                  'Listado de religiones': 'Lista-de-Religiones.html',
+                  'Metodos de la tecnologia': 'metodos.html',
+                  'Mike Cubbage': 'Mike-Cubbage.html',
+                  'Origenes de la informatica': 'OrigenesInfo.html',
+                  'Politica': 'Politica.html',
+                  'Psicologia': 'psicologia.html',
+                  'Quimica': 'Quimica.html',
+                  'Ramas de la historia': 'Ramas-de-la-Historia.html',
+                  'Religion': 'Religion.html',
+                  'Sistemas politicos': 'SistemasPoliticos.html',
+                  'Suricata': 'suricata.html',
+                  'Tecnologia': 'Tecnologia.html',
+                  'Tipos de religiones': 'Tipos-de-religion.html',
+                  'Tipos de tecnologias': 'Tipos-deTecnologia.html',
+
+                  // Agregar más temas y páginas aquí
+                  //aquí es donde agregamos las paginas que queremos que el buscador encuentre
+                  };
+
+                  // Agregar un evento de submit al formulario
+                  searchForm.addEventListener('submit', (e) => {
+                  e.preventDefault();
+                  const searchTerm = searchInput.value.trim();
+                  const page = themePages[searchTerm];
+                  if (page) {
+                   // Redirigir a la página correspondiente
+                  window.location.href = page;
+                  } else {
+                  // Mostrar un mensaje de error si no se encuentra la página
+                  searchResults.innerHTML = "No se encontró una página para" ({searchTerm});
+                  }
+                });
+            </script>
+										
+
+		      <!-- Aqui podes poner el codigo para el buscador para que salga en la barra de arriba a la par de Home -->
+
+									</nav>
+								</header>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<!-- Main -->
+				<div id="main">
+					<div class="container">
+						<div class="row main-row">
+							<div class="col-3 col-12-medium">
+
+								
+
+								<section>
+									<h2>Dato curioso</h2>
+									<p>Honduras es hogar del sitio arqueológico de Copán, uno de los centros más importantes de la civilización maya, 
+                    famoso por su impresionante Escalinata de Jeroglíficos, la mayor inscripción conocida en la escritura maya. 
+                    Redescubierto en 1839 por el explorador John Lloyd Stephens y el artista Frederick Catherwood, Copán ha revelado 
+                    valiosa información sobre la cultura y la arquitectura maya, convirtiéndose en un importante sitio Patrimonio de la Humanidad por la UNESCO.</p>
+								</section>
+
+							</div>
+							<div class="col-6 col-12-medium imp-medium">
+
+								<section class="middle-content">
+									<h2><strong>Historia de Honduras</strong></h2>
+									<p>La historia de Honduras, país ubicado en el centro de América Central, se remonta a unos 14 000 años (conforme al consenso de Clovis), en que se estima ocurrieron los primeros asentamientos de pobladores sedentarios en el país. Resalta en la historia geológica de Honduras el hecho de poseer el único reporte de fósiles de dinosaurios de América Central. Antes de la conquista por los españoles en el siglo XVI, lo que ahora es Honduras fue habitado por pueblos de culturas que interactuaron entre ellos en diverso grado, en el tiempo y el territorio. De aquella época sobresalen las influencias culturales mesoamericanas, más en concreto la cultura olmeca, la tolteca y la maya. Además de diversos pueblos relacionados con los grupos de influencia caribeña como los Pech, Tolupan, y Tawakhas.</p>
+                                    <p>Honduras fue una provincia de la Capitanía General de Guatemala que a su vez estuvo dentro del virreinato de Nueva España. El 15 de septiembre de 1821 se firma el Acta de Independencia de Centro América; respecto a México que se proclama en 1823, es en 1838 cuando Honduras se independiza de Centroamérica y se inicia el proceso de integración definitivo que da lugar a la Honduras contemporánea.</p>
+                                    <p>
+                                    <p>
+                                    <h1><strong>Honduras prehispánica</strong></h1>
+                                    <p>
+                                    <p>Antes de la Conquista española, Honduras estaba habitada por pueblos de culturas diversas, tradicionalmente se han clasificado en dos tipos culturales diferentes: Las culturas maya y tolteca. Sin embargo, La Honduras precolombina era étnica y lingüísticamente mucho más diversa de lo que esta distinción hace suponer.</p>
+                                    <p>Además de diversos grupos de mayas, los cuales estaban relacionados con los mayas de Yucatán y Guatemala. Existían chorotegas, tolupanes, lencas, misumalpas y posiblemente xincas. Los mayas se extendieron a través del valle del río Motagua, centrando su control en el principal centro ceremonial de Copán, cerca de la actual ciudad de Santa Rosa de Copán. Por tres siglos y medio, los mayas desarrollaron la ciudad, convirtiéndolo en uno de los principales centros de su cultura.2​ Causas aún discutidas, provocaron el abandono y la destrucción de Copán y otras ciudades mayas, que en la época de la conquista española ya no eran más que ruinas.</p>
+								    <p>
+                                    <p>
+                                    </section>
+
+
+                                    <h1>Acontecimientos Históricos en Honduras</h1>
+                                     <div id="map"></div>
+                                     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+                                     <script>
+                                       // Crear el mapa y configurarlo para iniciar en Honduras
+                                       var map = L.map('map').setView([13.5, -82.0], 6);
+                                   
+                                       // Añadir la capa de OpenStreetMap
+                                       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                       }).addTo(map);
+                                   
+                                       // Acontecimientos Históricos en Honduras
+                                       var events = [
+      // Eventos en Tegucigalpa
+      { location: [14.0668, -87.2068], title: "Batalla de La Trinidad", description: "Batalla significativa en la guerra de independencia de Centroamérica." },
+      { location: [13.9737, -85.9658], title: "Guerra del 60", description: "Conflicto militar entre Honduras y El Salvador en 1969." },
+      { location: [14.0708, -87.1921], title: "Descubrimiento de Copán", description: "Descubrimiento del sitio arqueológico de Copán en el siglo XIX." },
+      { location: [13.6714, -85.2130], title: "Revolución de 1957", description: "Revolución que resultó en el derrocamiento de la dictadura de Julio Lozano Díaz." },
+      { location: [13.6938, -87.0156], title: "Fundación de Tegucigalpa", description: "Fundación de la actual capital de Honduras en 1578." },
+      { location: [13.7431, -87.0983], title: "Movilización Popular de 2009", description: "Protestas y movilizaciones populares contra el golpe de estado de 2009." },
+
+      // Eventos en San Pedro Sula
+      { location: [15.5001, -88.0176], title: "Desarrollo Industrial de San Pedro Sula", description: "Crecimiento y desarrollo industrial durante el siglo XX." },
+      { location: [15.5055, -88.0192], title: "Guerra de las 100 Horas", description: "Conflicto bélico entre Honduras y El Salvador en 1969." },
+
+      // Eventos en La Ceiba
+      { location: [15.7612, -86.7872], title: "Festival Internacional de la Salsa", description: "Evento cultural y musical que atrae a visitantes internacionales." },
+      { location: [15.7528, -86.8056], title: "Desastre Natural de 1998", description: "Impacto del huracán Mitch en La Ceiba y sus alrededores." },
+
+      // Eventos en Choluteca
+      { location: [13.4208, -80.8301], title: "Fundación de Choluteca", description: "Establecimiento de Choluteca en 1526." },
+      { location: [13.4166, -80.8333], title: "Revolución Agraria de 1965", description: "Reforma agraria en la región de Choluteca." },
+
+      // Eventos en Comayagua
+      { location: [14.4534, -87.6319], title: "Destrucción del Convento de San Francisco", description: "Destrucción en 1838 durante el conflicto entre facciones." },
+      { location: [14.4467, -87.6444], title: "Catedral de Comayagua", description: "Inauguración y su papel en la historia colonial." },
+
+      // Eventos en Gracias
+      { location: [14.1833, -88.0333], title: "Revuelta de 1924", description: "Revuelta social y política en la región de Gracias." },
+      { location: [14.1850, -88.0300], title: "Guerra de los 6 Días", description: "Conflicto con repercusiones en Gracias durante la Guerra Fría." },
+
+      // Eventos en Juticalpa
+      { location: [14.5500, -86.1000], title: "Revolución de 1948", description: "Cambios políticos importantes en la región de Juticalpa." },
+      { location: [14.5300, -86.1150], title: "Escuela Normal de Juticalpa", description: "Fundación y papel en la educación del país." },
+
+      // Eventos en El Paraíso
+      { location: [13.9000, -86.0500], title: "Guerra de la Triple Alianza", description: "Participación y consecuencias en la región de El Paraíso." },
+      { location: [13.8950, -86.0400], title: "Movimiento Campesino de 1981", description: "Luchas por derechos de los campesinos en El Paraíso." },
+
+      // Eventos en Olancho
+      { location: [14.5500, -85.5667], title: "Crisis de Olancho", description: "Crisis económica y social en la región durante los años 90." },
+      { location: [14.5333, -85.5833], title: "Revolución de 1950", description: "Cambio social en Olancho y sus efectos en la región." },
+
+      // Eventos en Yoro
+      { location: [15.0000, -86.0000], title: "Desastre Natural de 2004", description: "Impacto del huracán en Yoro y áreas circundantes." },
+      { location: [14.9900, -86.0100], title: "Reforma Educativa de 1970", description: "Reformas en el sistema educativo en la región de Yoro." },
+
+      // Eventos en La Paz
+      { location: [13.6589, -88.1939], title: "Fundación de La Paz", description: "Establecimiento de la ciudad y su importancia histórica." },
+      { location: [13.6500, -88.2000], title: "Conferencia de Paz de 1983", description: "Importancia de la conferencia de paz para la región." },
+
+      // Eventos en Intibucá
+      { location: [13.9000, -86.0333], title: "Lucha por los Derechos Indígenas", description: "Actividades y movimientos en Intibucá por los derechos indígenas." },
+      { location: [13.8800, -86.0500], title: "Crisis Agrícola de 1992", description: "Impacto en la región de Intibucá debido a problemas agrícolas." },
+
+      // Eventos en Copán Ruinas
+      { location: [14.8333, -89.1500], title: "Descubrimiento de Ruinas de Copán", description: "Descubrimiento arqueológico y su importancia para la cultura maya." },
+      { location: [14.8200, -89.1400], title: "Desarrollo del Turismo Arqueológico", description: "Impacto del turismo en la economía local." },
+
+      // Eventos en Santa Bárbara
+      { location: [14.5833, -88.2167], title: "Rebelión de 1920", description: "Conflictos sociales y políticos en Santa Bárbara." },
+      { location: [14.5700, -88.2300], title: "Establecimiento del Mercado Local", description: "Desarrollo económico y social en la región." },
+
+      // Eventos en Choluteca
+      { location: [13.4208, -80.8301], title: "Fundación de Choluteca", description: "Establecimiento de Choluteca en 1526." },
+      { location: [13.4166, -80.8333], title: "Revolución Agraria de 1965", description: "Reforma agraria en la región de Choluteca." },
+
+      // Eventos en Atlántida
+      { location: [15.6667, -86.8333], title: "Desarrollo del Turismo en Atlántida", description: "Crecimiento del sector turístico en la región costera." },
+      { location: [15.6750, -86.8200], title: "Impacto del Huracán Mitch", description: "Desastres y recuperación en Atlántida tras el huracán Mitch." },
+
+      // Eventos en Colón
+      { location: [15.7000, -86.5000], title: "Desarrollo de Infraestructura en Colón", description: "Proyectos de infraestructura y su impacto en la región." },
+      { location: [15.7200, -86.4800], title: "Movimiento de Derechos Humanos", description: "Actividades y luchas por derechos humanos en Colón." },
+
+      // Eventos en Cortés
+      { location: [15.5000, -88.0167], title: "Establecimiento de la Zona Libre", description: "Creación y desarrollo de la Zona Libre en Cortés." },
+      { location: [15.5100, -88.0100], title: "Revolución Industrial de 1980", description: "Cambio en la economía de Cortés durante la Revolución Industrial." },
+
+      // Eventos en Gracias a Dios
+      { location: [15.6500, -83.0000], title: "Desarrollo de la Infraestructura Portuaria", description: "Mejoras en infraestructura portuaria en Gracias a Dios." },
+      { location: [15.6700, -82.9800], title: "Iniciativas de Desarrollo Sostenible", description: "Proyectos de desarrollo sostenible en la región." },
+
+      // Eventos en La Mosquitia
+      { location: [15.4000, -84.0000], title: "Exploración de La Mosquitia", description: "Exploraciones arqueológicas y descubrimientos en La Mosquitia." },
+      { location: [15.4100, -84.0100], title: "Conservación del Medio Ambiente", description: "Iniciativas para la conservación ambiental en La Mosquitia." }
+    ];
+                                   
+                                       // Crear una función para generar el contenido del popup con estilo
+                                       function createPopupContent(event) {
+                                         return `
+                                           <div class="card">
+                                             <div class="card-title">${event.title}</div>
+                                             <div class="card-content">${event.description}</div>
+                                           </div>
+                                         `;
+                                       }
+                                   
+                                       // Añadir marcadores para cada acontecimiento
+                                       events.forEach(function(event) {
+                                         L.marker(event.location).addTo(map)
+                                           .bindPopup(createPopupContent(event), {
+                                             minWidth: 200
+                                           });
+                                       });
+                                     </script>
+
+
+
+
+
+
+							</div>
+							<div class="col-3 col-12-medium">
+
+								<section>
+									<h2>Imagenes</h2>
+									<ul class="medium-image-list">
+										<li>
+											<a><img src="images/Historia-de-Honduras.jpg" alt="" height="200" class="left" /></a>
+										</li>
+										<li>
+											<a><img src="images/Historia-de-Honduras2.jpg" alt="" height="244" class="left" /></a>
+										</li>
+                                        <li>
+											<a><img src="images/Historia-de-Honduras3.jpg" alt="" height="224" class="left" /></a>
+										</li>
+                                        <li>
+											<a><img src="images/Historia-de-Honduras4.jpg" alt="" height="115" class="left" /></a>
+										</li>
+									</ul>
+								</section>
+								    <p>
+									<p>
+									<p>
+								    <p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			
+							</div>
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

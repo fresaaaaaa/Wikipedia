@@ -1,0 +1,310 @@
+<!DOCTYPE HTML>
+
+<html lang="es">
+	<head>
+		<title>Dibujo</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="assets/css/main.css" />
+
+	</head>
+	<body>
+        
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header-wrapper">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+
+								<header id="header">
+									<h1><a href="index.html" id="logo">Wikipedia</a></h1>
+									<nav id="nav">
+										<!--formulario de búsqueda -->
+                                        <form id="search-form">
+											<!-- Campo de entrada de búsqueda -->
+											<input type="search" id="search-input" placeholder="Buscar en Wikipedia...">
+											<!-- Botón de búsqueda -->
+											<button id="search-button">Buscar</button>
+										</form>
+		
+										<!-- Div para mostrar los resultados de búsqueda -->
+											<div id="search-results"></div>
+												
+												<style>
+													/* Estilos para la barra de búsqueda */
+	
+													#head-container {
+														display: flex;
+														flex-direction: row;
+														align-items: center;
+														padding: 10px;
+	
+													}
+	
+													#home-title{
+														margin-right: 10px;
+													}
+	
+													#search-form {
+														flex-grow: 1;
+														display: flex;
+														flex-direction: row;
+														align-items: center;
+														padding: 1px;
+														border: 1px solid #ccc;
+														border-radius: 2px;
+														box-shadow: 0 0 5px  rgba(101, 99, 99, 0.1);
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size:16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 10px;
+															}
+		
+															#search-input {
+																flex-grow: 1;
+																padding: 10px;
+																border: none;
+																border-radius: 5px;
+																font-size: 16px;
+																}
+		
+																#search-input {
+																flex-grow: 1;
+																padding: 10px;
+																border: none;
+																border-radius: 1px;
+																font-size: 16px;
+																}
+		
+																#search-button {
+																padding: 10px 15px;
+																border: none;
+																border-radius: 5px;
+																background-color: #1e9da4;
+																color: #fff;
+																cursor: context-menu;
+																}
+		
+																#search-button:hover {
+																background-color: #3e7b8e;
+																}
+		
+																#search-results {
+																padding: 10px;
+																}
+															
+		
+																</style>
+		
+																<script>
+																	// Obtener los elementos del formulario y el contenedor de resultados
+																	const searchForm = document.getElementById('search-form');
+																	const searchInput = document.getElementById('search-input');
+																	const searchButton = document.getElementById('search-button');
+																	const searchResults = document.getElementById('search-results');
+		
+		
+																 // Crear un objeto que mapee los temas con sus respectivas páginas
+																	const themePages = {
+																	'Arte': 'Arte.html',
+																	'Astronomia': 'Astronomía.html',
+																	'Dibujo': 'Dibujo.html',
+																	'Canto': 'Canto.html',
+																	'Musica': 'Musica.html',
+																	'Artes Plasticas': 'ArtesPlasticas.html',
+																	'Causas de guerra': 'causasGuerra.html',
+																	'Carrera sobre informatica': 'CarrerasInfo.html',
+																	'Concepto filosofico de las guerras': 'ConceptoFilosofico.html',
+																	'Benjamin Britten': 'benjaminBritten.html',
+																	'Biologia': 'Biologia.html',
+																	'Ciencias Naturales': 'CienciasNaturales.html',
+																	'Ciencias Sociales': 'cienciasSociales.html',
+																	'Doctrinas Politicas': 'DoctrinasPoliticas.html',
+																	'Economia': 'Economia.html',
+																	'Etimologia': 'EtimologiaPolitica.html',
+																	'Epistemologia de la geografia': 'Epistemologia.html',
+																	'Erizo': 'erizo.html',
+																	'Estudio de la religion': 'Estudio-de-la-Religion.html',
+																	'Zorro Fennec': 'Fennec.html',
+																	'Filosofia de la religion': 'Filosofia-de-la-Religion.html',
+																	'Filosofia de la historia': 'Filosofia-de-laHistoria.html',
+																	'Fisica': 'Fisica.html',
+																	'Francisco Morazan': 'Francisco-Morazan.html',
+																	'Funciones de la tecnologia': 'Funciones.html',
+																	'Funciones de la informatica': 'FuncionesInfo.html',
+																	'Geografia': 'Gegografia.html',
+																	'Geografia en sociales': 'geografia-de-sociales.html',
+																	'Geografia contemporanea': 'geografiaContemporanea.html',
+																	'Geografia general': 'GeografiaGeneral.html',
+																	'Geografia de Honduras': 'GeografiaHonduras.html',
+																	'Guerra de Israel y Gaza': 'Guerra-Israel-Gaza.html',
+																	'Guerras': 'guerras.html',
+																	'Guerras existentes': 'GuerrasHabidas.html',
+																	'Historia de Honduras': 'Historia-de-Honduras.html',
+																	'Historia': 'Historia.html',
+																	'Historiador': 'Historiador.html',
+																	'Historia de la informatica': 'HistoriaInfo.html',
+																	'Historia Politica': 'HistoriaPolitica.html',
+																	'Impacto de las guerras': 'Impacto.html',
+																	'Impacto de la tecnologia': 'impcto.html',
+																	'Informatica': 'Informatica.html',
+																	'Linguistica': 'Linguistica.html',
+																	'Listado de religiones': 'Lista-de-Religiones.html',
+																	'Metodos de la tecnologia': 'metodos.html',
+																	'Mike Cubbage': 'Mike-Cubbage.html',
+																	'Origenes de la informatica': 'OrigenesInfo.html',
+																	'Politica': 'Politica.html',
+																	'Psicologia': 'psicologia.html',
+																	'Quimica': 'Quimica.html',
+																	'Ramas de la historia': 'Ramas-de-la-Historia.html',
+																	'Religion': 'Religion.html',
+																	'Sistemas politicos': 'SistemasPoliticos.html',
+																	'Suricata': 'suricata.html',
+																	'Tecnologia': 'Tecnologia.html',
+																	'Tipos de religiones': 'Tipos-de-religion.html',
+																	'Tipos de tecnologias': 'Tipos-deTecnologia.html',
+	
+																	// Agregar más temas y páginas aquí
+																	//aquí es donde agregamos las paginas que queremos que el buscador encuentre
+																	};
+		
+																	// Agregar un evento de submit al formulario
+																	searchForm.addEventListener('submit', (e) => {
+																	e.preventDefault();
+																	const searchTerm = searchInput.value.trim();
+																	const page = themePages[searchTerm];
+																	if (page) {
+																	 // Redirigir a la página correspondiente
+																	window.location.href = page;
+																	} else {
+																  // Mostrar un mensaje de error si no se encuentra la página
+																	searchResults.innerHTML = "No se encontró una página para" ({searchTerm});
+																	}
+																});
+														</script>
+										
+
+		    <!-- Aqui podes poner el codigo para el buscador para que salga en la barra de arriba a la par de Home -->
+
+									</nav>
+								</header>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<!-- Main -->
+				<div id="main">
+					<div class="container">
+						<div class="row main-row">
+							<div class="col-3 col-12-medium">
+								<section>
+									<h2>Dato curioso</h2>
+									<p>Uno de los primeros métodos para almacenar información digital no usaba discos ni cintas, sino que se basaba en tarjetas perforadas. Este método se utilizó a finales del siglo XIX y principios del siglo XX en sistemas como el telar de Jacquard. Las tarjetas perforadas eran utilizadas para controlar el patrón del tejido en el telar, y más tarde, se adaptaron para almacenar y procesar datos en computadoras tempranas. ¡Imagínate que la misma tecnología que ayudaba a hacer tejidos complejos también fue crucial para el desarrollo de las primeras computadoras!</p>
+								</section>
+
+                                <br>
+                                
+
+
+							</div>
+							<div class="col-6 col-12-medium imp-medium">
+
+								
+									<h2><strong>metodos de la tecnologia</strong></h2>
+                                    <p>Las tecnologías usan, en general, métodos diferentes del científico, aunque la experimentación es también usado por las ciencias. Los métodos difieren según se trate de tecnologías de producción artesanal o industrial de artefactos, de prestación de servicios, de realización u organización de tareas de cualquier tipo.Un método común a todas las tecnologías de fabricación es el uso de herramientas e instrumentos para la construcción de artefactos. Las tecnologías de prestación de servicios, como el sistema de suministro eléctrico hacen uso de instalaciones complejas a cargo de personal especializado.</p>
+                                    <p>Cuando hablamos de "métodos de la tecnología," nos referimos a las diversas técnicas y enfoques utilizados para desarrollar, implementar y optimizar soluciones tecnológicas. Aquí tienes algunos ejemplos clave:</p>
+                                    <strong>-Algoritmos y Programación:</strong>
+                                    <P>Son métodos fundamentales en el desarrollo de software. Los algoritmos son secuencias de instrucciones diseñadas para realizar tareas específicas, mientras que la programación es el proceso de escribir estas instrucciones en un lenguaje que la computadora pueda entender.</P>
+                                    <Strong>-Machine Learning (Aprendizaje Automático):</Strong>
+                                    <p> Este es un método de inteligencia artificial en el que los sistemas aprenden y mejoran a partir de datos sin ser explícitamente programados para cada tarea. Los modelos se entrenan con grandes volúmenes de datos para identificar patrones y hacer predicciones.</p>
+                                    <strong>-Metodologías Ágiles:</strong>
+                                    <p> Estas son técnicas de gestión de proyectos, como Scrum y Kanban, que enfatizan la colaboración, la adaptabilidad y la entrega incremental. Se utilizan ampliamente en el desarrollo de software para mejorar la eficiencia y la flexibilidad.</p>
+                                    <strong>-Computación en la Nube:</strong>
+                                    <p>Permite el acceso remoto a recursos informáticos y almacenamiento a través de Internet. Proveedores como Amazon Web Services (AWS) y Microsoft Azure ofrecen servicios que facilitan el escalado y la gestión de infraestructuras tecnológicas.</p>
+                                    <strong>-Blockchain:</strong>
+                                    <p>Un método para registrar transacciones de manera segura y transparente a través de una cadena de bloques. Se usa principalmente en criptomonedas como Bitcoin, pero también tiene aplicaciones en la gestión de contratos y registros.</p>
+                                    <strong>-Impresión 3D:</strong>
+                                    <p>También conocida como fabricación aditiva, esta técnica crea objetos tridimensionales a partir de un modelo digital, añadiendo material capa por capa. Se utiliza en una variedad de campos, desde la medicina hasta la fabricación industrial.</p>
+                                    <strong>Internet de las Cosas (IoT):</strong>
+                                    <p>Consiste en la interconexión de dispositivos a través de Internet para recopilar y compartir datos. Ejemplos incluyen electrodomésticos inteligentes y sensores industriales.</p>
+                                    <strong>-Realidad Aumentada (AR) y Realidad Virtual (VR):</strong>
+                                    <p>AR superpone información digital sobre el mundo real a través de dispositivos como teléfonos inteligentes o gafas, mientras que VR crea entornos completamente virtuales en los que los usuarios pueden interactuar.</p>
+                                    </section>
+
+							</div>
+							<div class="col-3 col-12-medium">
+
+								<section>
+									<h2>Imagenes</h2>
+									<ul class="medium-image-list">
+										<li>
+											<a><img src="images/tecnologico17.png" alt=""  height="300" class="left" /></a>
+										</li>
+										<li>
+											<a><img src="images/tecnologico18.jpg" alt=""  height="300" class="left" /></a>
+										</li>
+                                        <li>
+											<a><img src="images/tecnologico19.webp" alt=""  height="350" class="left" /></a>
+										</li>
+									</ul>
+								</section>
+								    <p>
+									<p>
+									<p>
+								    <p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			
+							</div>
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+            
+	</body>
+</html>

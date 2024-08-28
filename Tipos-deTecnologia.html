@@ -1,0 +1,316 @@
+<!DOCTYPE HTML>
+
+<html lang="es">
+	<head>
+		<title>Dibujo</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="assets/css/main.css" />
+
+	</head>
+	<body>
+        
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header-wrapper">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+
+								<header id="header">
+									<h1><a href="index.html" id="logo">Wikipedia</a></h1>
+									<nav id="nav">
+										<!--formulario de búsqueda -->
+                                        <form id="search-form">
+											<!-- Campo de entrada de búsqueda -->
+											<input type="search" id="search-input" placeholder="Buscar en Wikipedia...">
+											<!-- Botón de búsqueda -->
+											<button id="search-button">Buscar</button>
+										</form>
+		
+										<!-- Div para mostrar los resultados de búsqueda -->
+											<div id="search-results"></div>
+												
+												<style>
+													/* Estilos para la barra de búsqueda */
+	
+													#head-container {
+														display: flex;
+														flex-direction: row;
+														align-items: center;
+														padding: 10px;
+	
+													}
+	
+													#home-title{
+														margin-right: 10px;
+													}
+	
+													#search-form {
+														flex-grow: 1;
+														display: flex;
+														flex-direction: row;
+														align-items: center;
+														padding: 1px;
+														border: 1px solid #ccc;
+														border-radius: 2px;
+														box-shadow: 0 0 5px  rgba(101, 99, 99, 0.1);
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size:16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 10px;
+															}
+		
+															#search-input {
+																flex-grow: 1;
+																padding: 10px;
+																border: none;
+																border-radius: 5px;
+																font-size: 16px;
+																}
+		
+																#search-input {
+																flex-grow: 1;
+																padding: 10px;
+																border: none;
+																border-radius: 1px;
+																font-size: 16px;
+																}
+		
+																#search-button {
+																padding: 10px 15px;
+																border: none;
+																border-radius: 5px;
+																background-color: #1e9da4;
+																color: #fff;
+																cursor: context-menu;
+																}
+		
+																#search-button:hover {
+																background-color: #3e7b8e;
+																}
+		
+																#search-results {
+																padding: 10px;
+																}
+															
+		
+																</style>
+		
+																<script>
+																	// Obtener los elementos del formulario y el contenedor de resultados
+																	const searchForm = document.getElementById('search-form');
+																	const searchInput = document.getElementById('search-input');
+																	const searchButton = document.getElementById('search-button');
+																	const searchResults = document.getElementById('search-results');
+		
+		
+																 // Crear un objeto que mapee los temas con sus respectivas páginas
+																	const themePages = {
+																	'Arte': 'Arte.html',
+																	'Astronomia': 'Astronomía.html',
+																	'Dibujo': 'Dibujo.html',
+																	'Canto': 'Canto.html',
+																	'Musica': 'Musica.html',
+																	'Artes Plasticas': 'ArtesPlasticas.html',
+																	'Causas de guerra': 'causasGuerra.html',
+																	'Carrera sobre informatica': 'CarrerasInfo.html',
+																	'Concepto filosofico de las guerras': 'ConceptoFilosofico.html',
+																	'Benjamin Britten': 'benjaminBritten.html',
+																	'Biologia': 'Biologia.html',
+																	'Ciencias Naturales': 'CienciasNaturales.html',
+																	'Ciencias Sociales': 'cienciasSociales.html',
+																	'Doctrinas Politicas': 'DoctrinasPoliticas.html',
+																	'Economia': 'Economia.html',
+																	'Etimologia': 'EtimologiaPolitica.html',
+																	'Epistemologia de la geografia': 'Epistemologia.html',
+																	'Erizo': 'erizo.html',
+																	'Estudio de la religion': 'Estudio-de-la-Religion.html',
+																	'Zorro Fennec': 'Fennec.html',
+																	'Filosofia de la religion': 'Filosofia-de-la-Religion.html',
+																	'Filosofia de la historia': 'Filosofia-de-laHistoria.html',
+																	'Fisica': 'Fisica.html',
+																	'Francisco Morazan': 'Francisco-Morazan.html',
+																	'Funciones de la tecnologia': 'Funciones.html',
+																	'Funciones de la informatica': 'FuncionesInfo.html',
+																	'Geografia': 'Gegografia.html',
+																	'Geografia en sociales': 'geografia-de-sociales.html',
+																	'Geografia contemporanea': 'geografiaContemporanea.html',
+																	'Geografia general': 'GeografiaGeneral.html',
+																	'Geografia de Honduras': 'GeografiaHonduras.html',
+																	'Guerra de Israel y Gaza': 'Guerra-Israel-Gaza.html',
+																	'Guerras': 'guerras.html',
+																	'Guerras existentes': 'GuerrasHabidas.html',
+																	'Historia de Honduras': 'Historia-de-Honduras.html',
+																	'Historia': 'Historia.html',
+																	'Historiador': 'Historiador.html',
+																	'Historia de la informatica': 'HistoriaInfo.html',
+																	'Historia Politica': 'HistoriaPolitica.html',
+																	'Impacto de las guerras': 'Impacto.html',
+																	'Impacto de la tecnologia': 'impcto.html',
+																	'Informatica': 'Informatica.html',
+																	'Linguistica': 'Linguistica.html',
+																	'Listado de religiones': 'Lista-de-Religiones.html',
+																	'Metodos de la tecnologia': 'metodos.html',
+																	'Mike Cubbage': 'Mike-Cubbage.html',
+																	'Origenes de la informatica': 'OrigenesInfo.html',
+																	'Politica': 'Politica.html',
+																	'Psicologia': 'psicologia.html',
+																	'Quimica': 'Quimica.html',
+																	'Ramas de la historia': 'Ramas-de-la-Historia.html',
+																	'Religion': 'Religion.html',
+																	'Sistemas politicos': 'SistemasPoliticos.html',
+																	'Suricata': 'suricata.html',
+																	'Tecnologia': 'Tecnologia.html',
+																	'Tipos de religiones': 'Tipos-de-religion.html',
+																	'Tipos de tecnologias': 'Tipos-deTecnologia.html',
+	
+																	// Agregar más temas y páginas aquí
+																	//aquí es donde agregamos las paginas que queremos que el buscador encuentre
+																	};
+		
+																	// Agregar un evento de submit al formulario
+																	searchForm.addEventListener('submit', (e) => {
+																	e.preventDefault();
+																	const searchTerm = searchInput.value.trim();
+																	const page = themePages[searchTerm];
+																	if (page) {
+																	 // Redirigir a la página correspondiente
+																	window.location.href = page;
+																	} else {
+																  // Mostrar un mensaje de error si no se encuentra la página
+																	searchResults.innerHTML = "No se encontró una página para" ({searchTerm});
+																	}
+																});
+														</script>
+										
+
+		    <!-- Aqui podes poner el codigo para el buscador para que salga en la barra de arriba a la par de Home -->
+
+									</nav>
+								</header>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<!-- Main -->
+				<div id="main">
+					<div class="container">
+						<div class="row main-row">
+							<div class="col-3 col-12-medium">
+								<section>
+									<h2>Dato curioso</h2>
+									<p>aunque muchas personas asocian la inteligencia artificial (IA) con avances recientes, sus orígenes se remontan a la década de 1950. Uno de los primeros programas de IA, llamado "Logic Theorist", fue desarrollado en 1955 por Allen Newell y Herbert A. Simon. Este programa fue capaz de resolver problemas matemáticos y demostrar teoremas, lo que marcó el inicio formal del campo de la inteligencia artificial.</p>
+								</section>
+
+                                <br>
+                                
+
+
+							</div>
+							<div class="col-6 col-12-medium imp-medium">
+
+								
+									<h2><strong>Tipos de Tecnologias</strong></h2>
+                                    <h2><strong>Tecnologias duras</strong></h2>
+                                    <p>La tecnología dura es una clasificación de la tecnología (usada también dentro de la tecnología adecuada o intermedia) que se refiere a aquella que es capaz de transformar los materiales para producir y construir objetos o artefactos. De lo anterior cabe destacar que las consideraciones éticas y morales no son parte de la tecnología dura. Sin embargo, no puede existir sin que exista la tecnología blanda previamente, y ambas afectan a la condición humana.Las tecnologías duras se refieren a aquellas tecnologías que están basadas en principios científicos y técnicos sólidos, y que generalmente implican el uso de maquinaria, herramientas y procesos industriales. Estas tecnologías suelen ser más tangibles y físicas en comparación con las tecnologías blandas, que se centran más en aspectos sociales, organizativos o de gestión.</p>
+                                    <h2><strong>Tecnologias blandas</strong></h2>
+                                    <p>Las tecnologías blandas son las que se manejan por empresas lectoras que tratan con las interacciones humanas y los procesos sociales. No constituyen objetos tangibles como las tecnologías duras. Una buena metáfora es aplicar esta cualidad en el contexto de la informática: Las tecnologías blandas son el "software" y las tecnologías duras son el "hardware". Estas tecnologías tienen como producto el mejoramiento de dinámicas sociales en instituciones u organizaciones (formales o no) con el fin de alcanzar un objetivo determinado. Estas organizaciones pueden ser empresas industriales, de comercio, de servicios, fundaciones, organizaciones con o sin fines de lucro, etc.</p>
+                                    <h2><strong>Tecnologias de informacion</strong></h2>
+                                    <p>La tecnología de la información es un proceso que utiliza una combinación de medios y métodos de recopilación, procesamiento y transmisión de datos para obtener nueva información de calidad sobre el estado de un objeto, proceso o fenómeno. El propósito de la tecnología de la información es la producción de información para su análisis por las personas y la toma de decisiones sobre la base de la misma para realizar una acción.Tambien es la aplicación de ordenadores y equipos de telecomunicación para almacenar, recuperar, transmitir y manipular datos, con frecuencia utilizado en el de los negocios u otras empresas. El término se utiliza como sinónimo para los computadores y las redes de computadoras, pero también abarca otras tecnologías de distribución de información, tales como la televisión y los teléfonos. Múltiples industrias están asociadas con las tecnologías de la información: hardware y software de computadoras, electrónica, semiconductores, internet, equipos de telecomunicación, el comercio electrónico y los servicios computacionales.</p>
+                                    <h2><strong>Tecnoloogias medicas</strong></h2>
+                                    <P>La tecnología médica es un área de conocimiento que tiene como objetivo la aplicación de diferentes soluciones tecnológicas para mejorar los procedimientos de diagnóstico, desarrollo de la enfermedad y tratamiento de los pacientes. Esta nueva área de conocimiento ha dado lugar a un nuevo profesional, el «tecnólogo médico», que se integra en los equipos de los centros sanitarios para garantizar el correcto uso y mantenimiento de estos sistemas. Múltiples especialidades, como radiodiagnóstico, anatomía patológica o cirugía, entre otras, requieren ya de los servicios de los tecnólogos médicos para poder hacer un uso efectivo de los sustanciales avances tecnológicos a los que se están enfrentando.</P>
+                                    <h2><strong>Tecnologias Ambiental</strong></h2>
+                                    <p>La tecnología ambiental, tecnología verde o tecnología limpia es aquella que se utiliza sin dañar el medio ambiente, la aplicación de la ciencia ambiental para conservar el ambiente natural y los recursos, y frenar los impactos negativos de la involucración humana. El desarrollo sostenible es el núcleo de las tecnologías ambientales. Cuando se aplica el desarrollo sostenible como solución para asuntos ambientales, las soluciones tienen que ser socialmente equitativas, económicamente viables, y ambientalmente seguras.</p>
+                                    <h2><strong>Tecnologias del consumo</strong></h2>
+                                    <p>La electrónica de consumo engloba todos los equipos electrónicos utilizados cotidianamente y que generalmente se utilizan para el entretenimiento, las comunicaciones y/o la oficina. Dentro de los productos clasificados bajo la categoría de electrónica de consumo se encuentran el computador personal, los teléfonos, los MP3, los equipos de audio, televisores, calculadoras, GPS Sistema de navegación para automóviles, cámaras digitales, reproductores y grabadores de videos, como por ejemplo el DVD, VHS o videocámaras. Algunas de las marcas más conocidas son: Apple, Samsung, Motorola, Alcatel, Huawei, Xiaomi, Panasonic, Toshiba, Canon, Nikon, Fujifilm, LG, TCL, HP, Lenovo, Nokia, Philips, Sony entre otras.La Consumer Electronics Association (CEA) o Asociación de electrónica de consumo en español, estima que en 2007 se vendieron 150 mil millones de dólares en electrodomésticos.Si bien la electrónica de consumo se fabrica en todas partes del mundo, existe una alta concentración en Asia Oriental. Cada año, los pioneros de la industria exponen y hablan sobre los más recientes modelos de electrodomésticos durante la Feria internacional de electrónica de consumo, que se lleva a cabo en Las Vegas, Nevada.</p>
+                                    <h2><strong>Tecnologias fijas</strong></h2>
+                                    <p>Estas tecnologías que no suelen sufrir cambios ni modificaciones salvo en ocasiones específicas, como cuando se desarrolla una mejora para aumentar su rendimiento. Si bien hay tecnologías que pueden utilizarse en distintas funciones, la fija reduce su efectividad a un mismo objetivo. Algunas de estas tecnologías incluyen a la industria del cemento o la de la siderurgia.Tambien son aquellas tecnologías que están integradas en infraestructuras o sistemas permanentes y que no cambian con frecuencia. Estas tecnologías suelen ser de gran escala y requieren una inversión significativa en su desarrollo e implementación. A menudo, están asociadas con la producción industrial, la construcción y otros sectores donde se necesita una base sólida y duradera. </p>
+                                    <h2><strong>Tecnologias flexibles</strong></h2>
+                                    <p>La tecnología flexible se refiere a sistemas, plataformas y soluciones que pueden adaptarse, modificarse o personalizarse rápidamente para satisfacer las necesidades específicas de un proyecto, un usuario o un cambio en el entorno. A diferencia de las soluciones rígidas, que permanecen estáticas ante las demandas cambiantes, la tecnología flexible ofrece una arquitectura adaptable y herramientas flexibles que permiten una personalización tecnológica y un rápido despliegue.La tecnología flexible se refiere a sistemas, procesos o herramientas que pueden adaptarse fácilmente a diferentes condiciones, necesidades o configuraciones. A diferencia de la tecnología fija, que es más estática y requiere una inversión significativa para su implementación y mantenimiento, la tecnología flexible permite cambios rápidos y ajustes sin grandes costos adicionales.</p>
+                                    <h2><strong>Tecnologias de operacion</strong></h2>
+                                    <p>La tecnología operativa (TO) es el uso de hardware y software para monitorear y controlar los procesos físicos, los dispositivos y la infraestructura. Los sistemas de tecnología operativa se encuentran en una amplia gama de sectores con alta utilización de activos, realizando una gran variedad de tareas que van desde el monitoreo de Infraestructura crítica (CI) hasta el control de robots en una planta de fabricación.  La TO se utiliza en una diversidad de industrias, que incluyen la manufactura, el petróleo y gas, la generación y distribución eléctrica, la aviación, la marítima, la ferroviaria y los servicios públicos. </p>
+                                    <h2><strong>Tecnologias de equipo</strong></h2>
+                                    <P> tecnología que engloba los procedimientos tecnológicos que se aprovechan en distintas industrias de fabricación, investigación o desarrollo. También incluye las herramientas en conjunto, así como los procesos y conocimientos utilizados para realizar este tipo de trabajos. Tambien se refieren a las herramientas, dispositivos y sistemas que se utilizan para realizar tareas específicas en diversos campos, como la manufactura, la construcción, la medicina, la agricultura y muchos otros. Estas tecnologías pueden incluir tanto hardware (equipos físicos) como software (programas y aplicaciones) que facilitan el trabajo y mejoran la eficiencia.</P>
+
+                                    </section>
+
+							</div>
+							<div class="col-3 col-12-medium">
+
+								<section>
+									<h2>Imagenes</h2>
+									<ul class="medium-image-list">
+										<li>
+											<a><img src="images/tecnologia5.jpeg" alt=""  height="300" class="left" /></a>
+										</li>
+										<li>
+											<a><img src="images/tecnologia6.jpeg" alt=""  height="200" class="left" /></a>
+										</li>
+                                        <li>
+											<a><img src="images/tecnologia8.jpg" alt=""  height="165" class="left" /></a>
+										</li>
+										<li>
+											<a><img src="images/tecnologia9.jpeg" alt=""  height="166" class="left" /></a>
+										</li>
+									</ul>
+								</section>
+								    <p>
+									<p>
+									<p>
+								    <p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			
+							</div>
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+            
+	</body>
+</html>

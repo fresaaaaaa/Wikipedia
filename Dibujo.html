@@ -1,0 +1,414 @@
+<!DOCTYPE HTML>
+
+<html lang="es">
+	<head>
+		<title>Dibujo</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="assets/css/main.css" />
+
+
+        <style>
+            canvas {
+                border: 1px solid #000;
+                display: block;
+                margin: 0 auto;
+            }
+            .toolbar {
+                text-align: center;
+                margin-bottom: 10px;
+            }
+            .toolbar button, .toolbar input[type="color"] {
+                margin: 0 5px;
+                padding: 10px;
+                cursor: pointer;
+            }
+        </style>
+
+
+	</head>
+	<body>
+        
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header-wrapper">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+
+								<header id="header">
+									<h1><a href="index.html" id="logo">Wikipedia</a></h1>
+									<nav id="nav">
+                                        <!--formulario de búsqueda -->
+                                        <form id="search-form">
+                                            <!-- Campo de entrada de búsqueda -->
+                                            <input type="search" id="search-input" placeholder="Buscar en Wikipedia...">
+                                            <!-- Botón de búsqueda -->
+                                            <button id="search-button">Buscar</button>
+                                        </form>
+        
+                                        <!-- Div para mostrar los resultados de búsqueda -->
+                                            <div id="search-results"></div>
+                                                
+                                                <style>
+                                                    /* Estilos para la barra de búsqueda */
+    
+                                                    #head-container {
+                                                        display: flex;
+                                                        flex-direction: row;
+                                                        align-items: center;
+                                                        padding: 10px;
+    
+                                                    }
+    
+                                                    #home-title{
+                                                        margin-right: 10px;
+                                                    }
+    
+                                                    #search-form {
+                                                        flex-grow: 1;
+                                                        display: flex;
+                                                        flex-direction: row;
+                                                        align-items: center;
+                                                        padding: 1px;
+                                                        border: 1px solid #ccc;
+                                                        border-radius: 2px;
+                                                        box-shadow: 0 0 5px  rgba(101, 99, 99, 0.1);
+                                                        }
+        
+                                                        #search-input {
+                                                            flex-grow: 1;
+                                                            padding: 10px;
+                                                            border: none;
+                                                            border-radius: 5px;
+                                                            font-size: 16px;
+                                                        }
+        
+                                                        #search-input {
+                                                            flex-grow: 1;
+                                                            padding: 10px;
+                                                            border: none;
+                                                            border-radius: 5px;
+                                                            font-size: 16px;
+                                                        }
+        
+                                                        #search-input {
+                                                            flex-grow: 1;
+                                                            padding: 10px;
+                                                            border: none;
+                                                            border-radius: 5px;
+                                                            font-size:16px;
+                                                        }
+        
+                                                        #search-input {
+                                                            flex-grow: 1;
+                                                            padding: 10px;
+                                                            border: none;
+                                                            border-radius: 5px;
+                                                            font-size: 10px;
+                                                            }
+        
+                                                            #search-input {
+                                                                flex-grow: 1;
+                                                                padding: 10px;
+                                                                border: none;
+                                                                border-radius: 5px;
+                                                                font-size: 16px;
+                                                                }
+        
+                                                                #search-input {
+                                                                flex-grow: 1;
+                                                                padding: 10px;
+                                                                border: none;
+                                                                border-radius: 1px;
+                                                                font-size: 16px;
+                                                                }
+        
+                                                                #search-button {
+                                                                padding: 10px 15px;
+                                                                border: none;
+                                                                border-radius: 5px;
+                                                                background-color: #1e9da4;
+                                                                color: #fff;
+                                                                cursor: context-menu;
+                                                                }
+        
+                                                                #search-button:hover {
+                                                                background-color: #3e7b8e;
+                                                                }
+        
+                                                                #search-results {
+                                                                padding: 10px;
+                                                                }
+                                                            
+        
+                                                                </style>
+        
+                                                                <script>
+                                                                    // Obtener los elementos del formulario y el contenedor de resultados
+                                                                    const searchForm = document.getElementById('search-form');
+                                                                    const searchInput = document.getElementById('search-input');
+                                                                    const searchButton = document.getElementById('search-button');
+                                                                    const searchResults = document.getElementById('search-results');
+        
+        
+                                                                 // Crear un objeto que mapee los temas con sus respectivas páginas
+                                                                    const themePages = {
+                                                                    'Arte': 'Arte.html',
+                                                                    'Astronomia': 'Astronomía.html',
+                                                                    'Dibujo': 'Dibujo.html',
+                                                                    'Canto': 'Canto.html',
+                                                                    'Musica': 'Musica.html',
+                                                                    'Artes Plasticas': 'ArtesPlasticas.html',
+                                                                    'Causas de guerra': 'causasGuerra.html',
+                                                                    'Carrera sobre informatica': 'CarrerasInfo.html',
+                                                                    'Concepto filosofico de las guerras': 'ConceptoFilosofico.html',
+                                                                    'Benjamin Britten': 'benjaminBritten.html',
+                                                                    'Biologia': 'Biologia.html',
+                                                                    'Ciencias Naturales': 'CienciasNaturales.html',
+                                                                    'Ciencias Sociales': 'cienciasSociales.html',
+                                                                    'Doctrinas Politicas': 'DoctrinasPoliticas.html',
+                                                                    'Economia': 'Economia.html',
+                                                                    'Etimologia': 'EtimologiaPolitica.html',
+                                                                    'Epistemologia de la geografia': 'Epistemologia.html',
+                                                                    'Erizo': 'erizo.html',
+                                                                    'Estudio de la religion': 'Estudio-de-la-Religion.html',
+                                                                    'Zorro Fennec': 'Fennec.html',
+                                                                    'Filosofia de la religion': 'Filosofia-de-la-Religion.html',
+                                                                    'Filosofia de la historia': 'Filosofia-de-laHistoria.html',
+                                                                    'Fisica': 'Fisica.html',
+                                                                    'Francisco Morazan': 'Francisco-Morazan.html',
+                                                                    'Funciones de la tecnologia': 'Funciones.html',
+                                                                    'Funciones de la informatica': 'FuncionesInfo.html',
+                                                                    'Geografia': 'Gegografia.html',
+                                                                    'Geografia en sociales': 'geografia-de-sociales.html',
+                                                                    'Geografia contemporanea': 'geografiaContemporanea.html',
+                                                                    'Geografia general': 'GeografiaGeneral.html',
+                                                                    'Geografia de Honduras': 'GeografiaHonduras.html',
+                                                                    'Guerra de Israel y Gaza': 'Guerra-Israel-Gaza.html',
+                                                                    'Guerras': 'guerras.html',
+                                                                    'Guerras existentes': 'GuerrasHabidas.html',
+                                                                    'Historia de Honduras': 'Historia-de-Honduras.html',
+                                                                    'Historia': 'Historia.html',
+                                                                    'Historiador': 'Historiador.html',
+                                                                    'Historia de la informatica': 'HistoriaInfo.html',
+                                                                    'Historia Politica': 'HistoriaPolitica.html',
+                                                                    'Impacto de las guerras': 'Impacto.html',
+                                                                    'Impacto de la tecnologia': 'impcto.html',
+                                                                    'Informatica': 'Informatica.html',
+                                                                    'Linguistica': 'Linguistica.html',
+                                                                    'Listado de religiones': 'Lista-de-Religiones.html',
+                                                                    'Metodos de la tecnologia': 'metodos.html',
+                                                                    'Mike Cubbage': 'Mike-Cubbage.html',
+                                                                    'Origenes de la informatica': 'OrigenesInfo.html',
+                                                                    'Politica': 'Politica.html',
+                                                                    'Psicologia': 'psicologia.html',
+                                                                    'Quimica': 'Quimica.html',
+                                                                    'Ramas de la historia': 'Ramas-de-la-Historia.html',
+                                                                    'Religion': 'Religion.html',
+                                                                    'Sistemas politicos': 'SistemasPoliticos.html',
+                                                                    'Suricata': 'suricata.html',
+                                                                    'Tecnologia': 'Tecnologia.html',
+                                                                    'Tipos de religiones': 'Tipos-de-religion.html',
+                                                                    'Tipos de tecnologias': 'Tipos-deTecnologia.html',
+    
+                                                                    // Agregar más temas y páginas aquí
+                                                                    //aquí es donde agregamos las paginas que queremos que el buscador encuentre
+                                                                    };
+        
+                                                                    // Agregar un evento de submit al formulario
+                                                                    searchForm.addEventListener('submit', (e) => {
+                                                                    e.preventDefault();
+                                                                    const searchTerm = searchInput.value.trim();
+                                                                    const page = themePages[searchTerm];
+                                                                    if (page) {
+                                                                     // Redirigir a la página correspondiente
+                                                                    window.location.href = page;
+                                                                    } else {
+                                                                  // Mostrar un mensaje de error si no se encuentra la página
+                                                                    searchResults.innerHTML = "No se encontró una página para" ({searchTerm});
+                                                                    }
+                                                                });
+                                                        </script>
+										
+
+		      <!-- Aqui podes poner el codigo para el buscador para que salga en la barra de arriba a la par de Home -->
+
+									</nav>
+								</header>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<!-- Main -->
+				<div id="main">
+					<div class="container">
+						<div class="row main-row">
+							<div class="col-3 col-12-medium">
+								<section>
+									<h2>Dato curioso</h2>
+									<p>el primer dibujo conocido de la historia fue hecho en la cueva de Chauvet, en Francia. Se estima 
+                                        que tiene alrededor de 32,000 años de antigüedad. Estas impresionantes imágenes de animales como 
+                                        leones, rinocerontes y bisontes se realizaron con pigmentos naturales y son consideradas unas de 
+                                        las primeras manifestaciones artísticas de la humanidad. ¡Es increíble pensar en cómo estas 
+                                        representaciones han perdurado a lo largo de los siglos!</p>
+								</section>
+
+                                <br>
+                                
+                                <section>
+                                <h2><strong><p>    Puedes dibujar aqui!</p></strong></h2>
+                                </section>
+
+
+                                <div class="toolbar">
+                                    <button id="pencil">Lápiz</button>
+                                    <button id="eraser">Borrador</button>
+                                    <button><input type="color" id="colorPicker" value="#000000">Color</button>
+                                    <button id="clear">Borrar todo</button>
+                                </div>
+                                <canvas id="miCanvas" width="250" height="560"></canvas>           
+                                               
+
+                                <script>
+                                    const canvas = document.getElementById('miCanvas');
+                                    const ctx = canvas.getContext('2d');
+                            
+                                    let drawing = false;
+                                    let lastX, lastY;
+                                    let tool = 'pencil'; // Herramienta inicial
+                            
+                                    // Estilo del lápiz
+                                    ctx.strokeStyle = '#000000'; // Color negro por defecto
+                                    ctx.lineWidth = 2;
+                            
+                                    // Cambiar herramienta
+                                    document.getElementById('pencil').addEventListener('click', () => {
+                                        tool = 'pencil';
+                                        ctx.lineWidth = 2; // Grosor del lápiz
+                                    });
+                            
+                                    document.getElementById('eraser').addEventListener('click', () => {
+                                        tool = 'eraser';
+                                        ctx.strokeStyle = 'white'; // Color del borrador
+                                        ctx.lineWidth = 10; // Grosor del borrador
+                                    });
+                            
+                                    document.getElementById('colorPicker').addEventListener('input', (e) => {
+                                        if (tool === 'pencil') {
+                                            ctx.strokeStyle = e.target.value; // Cambia el color del lápiz
+                                        }
+                                    });
+                            
+                                    document.getElementById('clear').addEventListener('click', () => {
+                                        ctx.clearRect(0, 0, canvas.width, canvas.height); // Borra todo el canvas
+                                    });
+                            
+                                    canvas.addEventListener('mousedown', (e) => {
+                                        if (e.button === 0) { // Botón izquierdo del ratón
+                                            drawing = true;
+                                            lastX = e.offsetX;
+                                            lastY = e.offsetY;
+                                        }
+                                    });
+                            
+                                    canvas.addEventListener('mousemove', (e) => {
+                                        if (drawing) {
+                                            const currentX = e.offsetX;
+                                            const currentY = e.offsetY;
+                            
+                                            ctx.beginPath(); // Inicia un nuevo camino de dibujo
+                                            ctx.moveTo(lastX, lastY); // Mueve el lápiz a la posición anterior
+                                            ctx.lineTo(currentX, currentY); // Dibuja una línea desde la última posición
+                                            ctx.stroke(); // Dibuja la línea
+                            
+                                            lastX = currentX; // Actualiza la última posición
+                                            lastY = currentY;
+                                        }
+                                    });
+                            
+                                    canvas.addEventListener('mouseup', () => {
+                                        drawing = false;
+                                    });
+                            
+                                    canvas.addEventListener('mouseout', () => {
+                                        drawing = false; // Dejar de dibujar si el ratón sale del canvas
+                                    });
+                            
+                                    // Previene el menú contextual del clic derecho
+                                    canvas.addEventListener('contextmenu', (e) => {
+                                        e.preventDefault();
+                                    });
+                                </script>
+                                
+                                
+
+
+
+
+							</div>
+							<div class="col-6 col-12-medium imp-medium">
+
+								<section class="middle-content">
+									<h2><strong>Dibujo</strong></h2>
+									<p>El término dibujo significa tanto el arte que enseña a dibujar,1​ como la delineación, figura o imagen ejecutada en oscuro y claro; toma nombre de acuerdo al material con el que se hace.2​ Es una forma de expresión gráfica que plasma imágenes sobre un espacio plano, considerado parte de la pintura y una de las modalidades de las artes visuales. Se considera al dibujo como el lenguaje gráfico universal y ha sido utilizado por la humanidad para transmitir ideas, proyectos y en un sentido más amplio.</p>
+                                    <p>
+                                    <p>
+                                    <h1><strong>Descripción general</strong></h1>
+                                    <p>
+                                    <p>El dibujo es una de las formas más antiguas de expresión humana dentro de las artes visuales. Generalmente se ocupa del marcado de líneas y áreas de tono en papel u otro material, donde la representación precisa del mundo visual se expresa sobre una superficie plana.3​ Los dibujos tradicionales eran monocromáticos, o al menos tenían poco color,4​ mientras que los dibujos modernos a lápiz de colores pueden acercarse o cruzar una frontera entre el dibujo y la pintura. En la terminología occidental, el dibujo es distinto de la pintura, aunque a menudo se emplean medios similares en ambas tareas. En las pinturas al pastel se pueden utilizar medios secos, normalmente asociados con el dibujo, como la tiza. El dibujo se puede realizar con un medio líquido, aplicado con pinceles o bolígrafos. Soportes similares también pueden servir para ambas cosas: pintar generalmente implica la aplicación de pintura líquida sobre lienzos o paneles preparados, pero a veces se dibuja primero un dibujo inferior sobre ese mismo soporte.</p>
+									<p>El dibujo suele ser exploratorio, con considerable énfasis en la observación, la resolución de problemas y la composición. El dibujo también se utiliza habitualmente en la preparación de una pintura, lo que oscurece aún más su distinción. Los dibujos creados para estos fines se denominan bocetos.</p>
+                                    <p>El cráneo cuenta con órbitas grandes, no tiene cresta sagital, el arco cigomático es delgado y la apófisis coronoides mandibular es de mediano tamaño. La fórmula dental es 3/3 1/1 3/3 2/2 = 36. Los incisivos son ligeramente curvos; los premolares y molares tienen cúspides altas y puntiagudas.</p>
+								    <p>Hay varias categorías de dibujo, incluidos dibujos de figuras, caricaturas, garabatos y dibujo a mano alzada. También hay muchos métodos de dibujo, como el arte con líneas, el punteado, el sombreado, el método surrealista de la grafomanía entópica (en el que se hacen puntos en los lugares de impurezas en una hoja de papel en blanco y luego se hacen líneas entre los puntos), y calco (dibujar en un papel translúcido, como papel de calco, sobre el contorno de formas preexistentes que se ven a través del papel).</p>
+                                    <p>Un dibujo rápido y sin refinar suele denominarse un boceto.</p>
+                                    <p>En campos ajenos al arte, los dibujos técnicos o planos de edificios, maquinaria, circuitos y otras cosas a menudo se denominan "dibujos" aunque hayan sido transferidos a otro medio mediante impresión y no a mano.</p>
+                                    </section>
+
+							</div>
+							<div class="col-3 col-12-medium">
+
+								<section>
+									<h2>Imagenes</h2>
+									<ul class="medium-image-list">
+										<li>
+											<a><img src="images/dibujo.jpg" alt=""  height="460" class="left" /></a>
+										</li>
+										<li>
+											<a><img src="images/dibujo2.jpg" alt=""  height="254" class="left" /></a>
+										</li>
+                                        <li>
+											<a><img src="images/dibujo3.jpg" alt=""  height="300" class="left" /></a>
+										</li>
+									</ul>
+								</section>
+								    <p>
+									<p>
+									<p>
+								    <p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			
+							</div>
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+            
+	</body>
+</html>

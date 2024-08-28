@@ -1,0 +1,336 @@
+<!DOCTYPE HTML>
+
+<html lang="es">
+	<head>
+		<title>Dibujo</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="assets/css/main.css" />
+
+	</head>
+	<body>
+        
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header-wrapper">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+
+								<header id="header">
+									<h1><a href="index.html" id="logo">Wikipedia</a></h1>
+									<nav id="nav">
+										<!--formulario de búsqueda -->
+                                        <form id="search-form">
+											<!-- Campo de entrada de búsqueda -->
+											<input type="search" id="search-input" placeholder="Buscar en Wikipedia...">
+											<!-- Botón de búsqueda -->
+											<button id="search-button">Buscar</button>
+										</form>
+		
+										<!-- Div para mostrar los resultados de búsqueda -->
+											<div id="search-results"></div>
+												
+												<style>
+													/* Estilos para la barra de búsqueda */
+	
+													#head-container {
+														display: flex;
+														flex-direction: row;
+														align-items: center;
+														padding: 10px;
+	
+													}
+	
+													#home-title{
+														margin-right: 10px;
+													}
+	
+													#search-form {
+														flex-grow: 1;
+														display: flex;
+														flex-direction: row;
+														align-items: center;
+														padding: 1px;
+														border: 1px solid #ccc;
+														border-radius: 2px;
+														box-shadow: 0 0 5px  rgba(101, 99, 99, 0.1);
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size:16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 10px;
+															}
+		
+															#search-input {
+																flex-grow: 1;
+																padding: 10px;
+																border: none;
+																border-radius: 5px;
+																font-size: 16px;
+																}
+		
+																#search-input {
+																flex-grow: 1;
+																padding: 10px;
+																border: none;
+																border-radius: 1px;
+																font-size: 16px;
+																}
+		
+																#search-button {
+																padding: 10px 15px;
+																border: none;
+																border-radius: 5px;
+																background-color: #1e9da4;
+																color: #fff;
+																cursor: context-menu;
+																}
+		
+																#search-button:hover {
+																background-color: #3e7b8e;
+																}
+		
+																#search-results {
+																padding: 10px;
+																}
+															
+		
+																</style>
+		
+																<script>
+																	// Obtener los elementos del formulario y el contenedor de resultados
+																	const searchForm = document.getElementById('search-form');
+																	const searchInput = document.getElementById('search-input');
+																	const searchButton = document.getElementById('search-button');
+																	const searchResults = document.getElementById('search-results');
+		
+		
+																 // Crear un objeto que mapee los temas con sus respectivas páginas
+																	const themePages = {
+																	'Arte': 'Arte.html',
+																	'Astronomia': 'Astronomía.html',
+																	'Dibujo': 'Dibujo.html',
+																	'Canto': 'Canto.html',
+																	'Musica': 'Musica.html',
+																	'Artes Plasticas': 'ArtesPlasticas.html',
+																	'Causas de guerra': 'causasGuerra.html',
+																	'Carrera sobre informatica': 'CarrerasInfo.html',
+																	'Concepto filosofico de las guerras': 'ConceptoFilosofico.html',
+																	'Benjamin Britten': 'benjaminBritten.html',
+																	'Biologia': 'Biologia.html',
+																	'Ciencias Naturales': 'CienciasNaturales.html',
+																	'Ciencias Sociales': 'cienciasSociales.html',
+																	'Doctrinas Politicas': 'DoctrinasPoliticas.html',
+																	'Economia': 'Economia.html',
+																	'Etimologia': 'EtimologiaPolitica.html',
+																	'Epistemologia de la geografia': 'Epistemologia.html',
+																	'Erizo': 'erizo.html',
+																	'Estudio de la religion': 'Estudio-de-la-Religion.html',
+																	'Zorro Fennec': 'Fennec.html',
+																	'Filosofia de la religion': 'Filosofia-de-la-Religion.html',
+																	'Filosofia de la historia': 'Filosofia-de-laHistoria.html',
+																	'Fisica': 'Fisica.html',
+																	'Francisco Morazan': 'Francisco-Morazan.html',
+																	'Funciones de la tecnologia': 'Funciones.html',
+																	'Funciones de la informatica': 'FuncionesInfo.html',
+																	'Geografia': 'Gegografia.html',
+																	'Geografia en sociales': 'geografia-de-sociales.html',
+																	'Geografia contemporanea': 'geografiaContemporanea.html',
+																	'Geografia general': 'GeografiaGeneral.html',
+																	'Geografia de Honduras': 'GeografiaHonduras.html',
+																	'Guerra de Israel y Gaza': 'Guerra-Israel-Gaza.html',
+																	'Guerras': 'guerras.html',
+																	'Guerras existentes': 'GuerrasHabidas.html',
+																	'Historia de Honduras': 'Historia-de-Honduras.html',
+																	'Historia': 'Historia.html',
+																	'Historiador': 'Historiador.html',
+																	'Historia de la informatica': 'HistoriaInfo.html',
+																	'Historia Politica': 'HistoriaPolitica.html',
+																	'Impacto de las guerras': 'Impacto.html',
+																	'Impacto de la tecnologia': 'impcto.html',
+																	'Informatica': 'Informatica.html',
+																	'Linguistica': 'Linguistica.html',
+																	'Listado de religiones': 'Lista-de-Religiones.html',
+																	'Metodos de la tecnologia': 'metodos.html',
+																	'Mike Cubbage': 'Mike-Cubbage.html',
+																	'Origenes de la informatica': 'OrigenesInfo.html',
+																	'Politica': 'Politica.html',
+																	'Psicologia': 'psicologia.html',
+																	'Quimica': 'Quimica.html',
+																	'Ramas de la historia': 'Ramas-de-la-Historia.html',
+																	'Religion': 'Religion.html',
+																	'Sistemas politicos': 'SistemasPoliticos.html',
+																	'Suricata': 'suricata.html',
+																	'Tecnologia': 'Tecnologia.html',
+																	'Tipos de religiones': 'Tipos-de-religion.html',
+																	'Tipos de tecnologias': 'Tipos-deTecnologia.html',
+	
+																	// Agregar más temas y páginas aquí
+																	//aquí es donde agregamos las paginas que queremos que el buscador encuentre
+																	};
+		
+																	// Agregar un evento de submit al formulario
+																	searchForm.addEventListener('submit', (e) => {
+																	e.preventDefault();
+																	const searchTerm = searchInput.value.trim();
+																	const page = themePages[searchTerm];
+																	if (page) {
+																	 // Redirigir a la página correspondiente
+																	window.location.href = page;
+																	} else {
+																  // Mostrar un mensaje de error si no se encuentra la página
+																	searchResults.innerHTML = "No se encontró una página para" ({searchTerm});
+																	}
+																});
+														</script>
+										
+
+		    <!-- Aqui podes poner el codigo para el buscador para que salga en la barra de arriba a la par de Home -->
+
+									</nav>
+								</header>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<!-- Main -->
+				<div id="main">
+					<div class="container">
+						<div class="row main-row">
+							<div class="col-3 col-12-medium">
+								<section>
+									<h2>Dato curioso</h2>
+									<p>Aunque muchas religiones se centran en la adoración de un ser supremo, hay tradiciones religiosas que no tienen un concepto de Dios personal. Por ejemplo, el budismo no se centra en la adoración de un dios creador, sino en las enseñanzas de Siddhartha Gautama (Buda) y en la búsqueda de la iluminación a través de la práctica espiritual y la comprensión de la naturaleza del sufrimiento. Esto lo convierte en una religión más filosófica y ética que teológica, lo que lo distingue de muchas otras tradiciones religiosas.</p>
+								</section>
+
+                                <br>
+                                
+
+
+
+							</div>
+							<div class="col-6 col-12-medium imp-medium">
+
+								
+									<h2><strong>Tipos de Religiones</strong></h2>
+                                    <p></p>
+                                    <h2><strong>cristianismo</strong></h2>
+									<p>La religión cristiana es una de las principales religiones monoteístas del mundo, centrada en la vida y enseñanzas de Jesucristo, a quien sus seguidores consideran el Cristo (del griego "Cristos," que significa "ungido" o "mesías").Es una religión global con una vasta cantidad de adherentes y una rica variedad de tradiciones y denominaciones. </p>
+                                    <p>Es una religión diversa tanto cultural como doctrinalmente. Sus principales ramas son el catolicismo, el protestantismo y la ortodoxia. Sus adherentes, llamados cristianos, comparten la creencia de que Jesús de Nazaret es el Hijo de Dios y el Mesías (en griego, Cristo) profetizado en el Antiguo Testamento y que sufrió, fue crucificado, descendió al infierno y resucitó de entre los muertos para la salvación de la humanidad.</p>
+                                    <p>
+                                    <p>
+                                    <h2><strong>catolicismo</strong></h2>
+                                    <p>El catolicismo es una rama del cristianismo y una de las principales denominaciones religiosas del mundo. Se caracteriza por su adhesión a la autoridad del Papa, el obispo de Roma, y por sus tradiciones y doctrinas específicas.
+                                        El catolicismo es una religión de origen cristiano cuya máxima autoridad es el papa que reside en la Santa Sede ubicada en el Estado soberano del Vaticano .
+                                    </p>
+                                    <p>De las diversas corrientes del cristianismo, el catolicismo es la más uniforme y organizada. Esto se debe a que la Iglesia católica es una institución antigua, jerárquica y unificada, que se considera a sí misma como la única heredera de la doctrina enseñada por Jesús de Nazaret, el Hijo de Dios en el dogma cristiano. En este sentido, el catolicismo tiene su origen en la figura del apóstol Pedro, identificado como el primer papa, a quien, según el Nuevo Testamento, Jesús le dijo: “Tú eres Pedro (o sea, Piedra), y sobre esta piedra edificaré mi Iglesia” (Mateo 16:18).</p>
+                                    <p></p>
+									<h2><strong>Budismo</strong></h2>
+                                    <p>El budismo es una religión y una doctrina filosófica y espiritual perteneciente a la familia dhármica. Es considerada como una religión «transteísta», lo que significa que sus practicantes no tienen ni siguen a un dios todopoderoso. Se centra en buscar la paz, la armonía, la tranquilidad y el equilibrio. Comprende una variedad de tradiciones, creencias religiosas y prácticas espirituales, principalmente atribuidas a Buda Gautama. El budismo es la cuarta religión más importante del mundo, con más de 500 millones de adeptos, o el 7 % de la población mundial.</p>
+								    <p>El budismo se originó en la India, específicamente al sur de Nepal,​ entre los siglos VI y IV a. C., desde donde se extendió a gran parte del este de Asia y declinó su práctica en el país de origen durante la Edad Media.La mayoría de las tradiciones del budismo y la filosofía budista comparten el objetivo de superar el sufrimiento (dukkha) y el ciclo de muerte y renacimiento (samsara), ya sea por el logro del nirvana o por el camino de la budeidad. Las escuelas budistas varían en su interpretación del camino hacia la liberación, la importancia relativa y la canonicidad asignadas a los diversos textos budistas, y sus enseñanzas y prácticas específicas. Las prácticas ampliamente observadas incluyen refugiarse en el buda, el dharma y la sangha, la observancia de los preceptos morales, el monasticismo, la meditación y el cultivo de los pāramitās (perfecciones o virtudes).</p>
+                                    <p></p>
+                                    <h2><strong>Judaismo</strong></h2>
+                                    <p>Es el rasgo principal de la fe judía es la creencia en un Dios omnisciente, omnipotente, personal y providente, que habría creado el universo y elegido al pueblo judío para revelarle la ley contenida en los Diez Mandamientos y las prescripciones rituales de los libros tercero y cuarto de la Torá.</p>
+									<p>El término judaísmo se refiere a la religión, tradición y cultura del pueblo judío. Históricamente, es la más antigua de las tres principales religiones abrahámicas,​ grupo que tiene como base e incluye el cristianismo y el islam, originadas en Medio Oriente y tiene la tradición espiritual identificada con Abraham. Cuenta con el menor número de fieles entre ellas.</p>
+									<p></p>
+									<h2><strong>Hinduismo</strong></h2>
+									<p>El hinduismo es una religión que es predominante en el subcontinente indio, especialmente los países India y Nepal. Es la tercera más extendida del mundo; tiene más de mil millones de fieles. Esta religión es único debido a que no posee fundador; no es una religión ni una filosofía sino una suma de ellas.Es un conjunto de creencias metafísicas, religiosas, cultos, costumbres y rituales que conforman una tradición, en la que no existen ni órdenes sacerdotales que establezcan un dogma único, ni una organización central.</p>
+									<p>Se trataría más bien de un conglomerado de creencias procedentes de pueblos de diferentes regiones junto con las que trajeron los arios que se establecieron en el valle del Indo. Los hinduistas llaman a aquella tradición religiosa sanātana dharma (‘religión eterna’), porque creen que no tiene principio ni tendrá fin. Según ellos ha existido durante más de 5000 años. Consideran que el hinduismo es la tradición religiosa más antigua del mundo.El hinduismo prescribe obligaciones morales, tales como la veracidad (satya), abstenerse de hacerle daño a seres vivientes, paciencia, tolerancia, autocontrol y compasión, entre otros. Las cuatro denominaciones mayores del hinduismo son vaisnavismo, shivaísmo, shaktismo y smartismo.</p>
+									<p></p>
+									<h2><strong>Islamismo</strong></h2>
+									<p>El islam es una religión abrahámica monoteísta que establece como premisa fundamental (shahada) para sus creyentes que «No hay más dios que Alá y Mahoma es su profeta».​ La palabra árabe castellanizada como Alá, significa Dios y su etimología es la misma de la palabra semítica El, con la que se nombra a Dios en la Biblia (y la Torá). El Islam enseña que Dios es misericordioso, todopoderoso y único, y ha guiado a la humanidad a través de profetas, escrituras reveladas y signos naturales.​ Las principales escrituras del Islam son el Corán, que se cree que es la palabra textual de Dios, así como las enseñanzas y prácticas (sunnah), en los relatos tradicionales (hadiz) de Mahoma (c. 570 – 632).​ Es la segunda religión más grande del mundo, tras el cristianismo y la que tiene mayor crecimiento en términos de seguidores, quienes se estima alcanzan 1900 millones,​ aproximadamente el 25 % de la población mundial.</p>
+									<p>Los eruditos islámicos definen al islam como: «La sumisión a Dios el Altísimo a través del monoteísmo, la obediencia y el abandono de la idolatría», es decir, la versión completa y universal de una fe primordial que fue revelada muchas veces antes a través de profetas como Adán, Abraham, Moisés y Jesús.​ Los seguidores del islam se denominan musulmanes (del árabe muslim مسلم, 'que se somete'). Creen que Mahoma es el último de los profetas enviados por Dios y sello de la Profecía.​ El libro sagrado del islam es el Corán,​ que según los musulmanes fue dictado por Alá (Dios) a Mahoma a través de Yibril (el arcángel Gabriel)​ y es (en árabe) considerado por ellos como la revelación final e inalterada de Dios.</p>
+									<h2><strong>Confucianismo</strong></h2>
+									<p>El confucianismo es tanto una religión como una filosofía política que pone el énfasis en la ética y virtud individuales para alcanzar una sociedad y gobierno estables. Kong Fuzi (el 'maestro' Kong), más conocido por la versión latinizada “Confucio”, predicó en la China del siglo VI a.El confucianismo  también conocido como ruismo  y a veces también llamado confucionismo,​ es un sistema de pensamiento con aplicaciones religiosas, rituales y morales, predicadas por los discípulos y seguidores de Confucio tras su muerte.Las doctrinas del confucianismo se centran en los valores humanos como la armonía familiar y social, la piedad filial que es un sistema de normas rituales que determina cómo debe actuar una persona para estar en armonía con la ley del Cielo. El confucianismo tradicionalmente sostiene que estos valores se basan en el principio trascendente conocido como Cielo (天, Tiān) y también incluye la creencia en espíritus o dioses. El confucianismo se podría entender como una ética social y humanista, de un sistema centrado en los seres humanos y sus relaciones. En el confucianismo se hace hincapié en los rituales formales de todos los aspectos de la vida, desde casi las ceremonias religiosas de estricta cortesía y deferencia a uno de los ancianos, especialmente a los padres y al Estado en la forma del emperador.</p>
+									<h2><strong>La fe Bahai</strong></h2>
+									<p>El bahaísmo1​ —conocido como fe bahaí entre sus seguidores y en la bibliografía relacionada—2​ es una religión abrahámica monoteísta, cuyos fieles siguen las enseñanzas del religioso persa Bahá'u'lláh,3​ su profeta y fundador, a quien consideran un Mensajero de Dios para la época actual.4​
+										Los principios centrales de la fe bahaí se resumen en tres unidades: la unidad de Dios, la unidad de la humanidad y la unidad de la religión como una serie de revelaciones sucesivas.5​
+										Según el Anuario de la Enciclopedia Británica de 1992, la fe bahaí está establecida en 247 países y territorios. Los bahaíes proceden de más de 2100 grupos étnicos, raciales y tribales, y totalizaban en 2020 más de ocho millones de fieles en el mundo, la mayoría en la India.​ Los principales pasajes de los textos sagrados bahaíes se han traducido a 802 idiomas.Los bahà'ís creen que, después de la muerte, la naturaleza espiritual del ser humano pervive y sigue evolucionando en otras esferas de la existencia y, por eso, el objetivo de la vida es desarrollar la vertiente espiritual de la persona, en todas aquellas cualidades que lo acercan a la otra existencia.</p>
+									<h2><strong>Los sij</strong></h2>
+									<p>El sijismo (o sikhismo) es una religión surgida en el norte de la India. Surge como consecuencia de la predicación de su fundador, el gurú Nanak (1469-1539) como un intento de acercar los puntos de vista del islam y del hinduismo. Nanak apostó por potenciar el igualitarismo.El sijismo es una de las religiones más jóvenes, ya que tiene sus orígenes a finales del siglo XV. Hay entre 23 y 25 millones de sijs(sij significa discípulo), que creen en un único Dios y que llaman a su libro sagrado Guru Granth Sahib Ji.Un sij o sik . 'sijs' o 'sijí es un seguidor del sijismo, una religión monoteísta que tuvo origen durante el siglo XV en la región de Punyab dentro del subcontinente indio.2​ El término «sij» tiene su origen en la palabra del sánscrito .​ Un sij, de acuerdo con el Artículo 1 del Sikh Rehat Maryada , es «cualquier ser humano que crea fielmente en Un Ser Inmortal; diez gurúes, desde Gurú Nanak hasta Gurú Gobind Singh; Gurú Granth Sahib; las enseñanzas de los diez gurúes y el bautismo legado de los diez gurúes.</p>
+									<p>Un «sij» se refiere propiamente a los adeptos del sijismo como religión, no como grupo étnico. Sin embargo, en el sijismo rara vez se producen conversiones, la mayoría de los sijs comparten fuertes lazos étnico-religiosos. Por lo tanto muchos países, como el Reino Unido, reconocen a los sij como un grupo étnico y así se los designa en sus censos.​ La organización sin fines de lucro American United Sikhs ha luchado para que los sij estén incluidos en los censos de EE.UU, con el argumento de que los sijs se identifican a sí mismos como una «minoría étnica» y creen «que son algo más que solo una religión».</p>
+									<h2><strong>Hare Krishna</strong></h2>
+									<p>Los krisnaístas creen que las almas que viven en el mundo material nunca estuvieron realmente en el mundo espiritual en relación con Dios, sino que vivieron eternamente adormecidos en sus márgenes (tatha-stha: ‘margen-está’).
+
+										La meta de los hare krisna es desarrollar una relación amorosa con Krisna a través del bhakti (‘devoción’, o ―según la traducción acuñada por Bhaktivedanta Prabhupada― ‘servicio devocional’). Los hare krisna le dicen «bhakti yoga», para categorizarlo junto con el karma yoga, el jñana yoga o el hatha yoga.Los krisnaístas consideran que Krishna ―la forma de Dios de piel oscura (krishná es un adjetivo que significa ‘negro’) y dos brazos― es la suprema entre todas las personalidades de Dios, y que Visnú es solo el aspecto majestuoso de Krishna. Con Visnú se puede sentir solo un amor respetuoso y distante, en cambio con Krishna se pueden mantener varios tipos de relaciones amorosas íntimas: como hijo (siendo el devoto el padre o la madre de Krishna), como amigo, como novio, etc.Los krisnaístas creen que las almas que viven en el mundo material nunca estuvieron realmente en el mundo espiritual en relación con Dios, sino que vivieron eternamente adormecidos en sus márgenes.</p>
+                                    </section>
+
+							</div>
+							<div class="col-3 col-12-medium">
+
+								<section>
+									<h2>Imagenes</h2>
+									<ul class="medium-image-list">
+										<li>
+											<a><img src="images/religion5.webp" alt=""  height="167" class="left" /></a>
+										</li>
+										<li>
+											<a><img src="images/religion6.jpeg" alt=""  height="269" class="left" /></a>
+										</li>
+                                        <li>
+											<a><img src="images/religion7.webp" alt=""  height="220" class="left" /></a>
+										</li>
+										<li>
+											<a><img src="images/religion8.webp" alt=""  height="295" class="left" /></a>
+										</li>
+									</ul>
+								</section>
+								    <p>
+									<p>
+									<p>
+								    <p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			
+							</div>
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+            
+	</body>
+</html>

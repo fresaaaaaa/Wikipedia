@@ -1,0 +1,321 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Guerras</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+	</head>
+	<body>
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<div id="header-wrapper">
+					<div class="container">
+						<div class="row">
+							<div class="col-12">
+
+								<header id="header">
+									<h1><a href="index.html" id="logo">Wikipedia</a></h1>
+									<nav id="nav">
+										<!--formulario de búsqueda -->
+                                        <form id="search-form">
+											<!-- Campo de entrada de búsqueda -->
+											<input type="search" id="search-input" placeholder="Buscar en Wikipedia...">
+											<!-- Botón de búsqueda -->
+											<button id="search-button">Buscar</button>
+										</form>
+		
+										<!-- Div para mostrar los resultados de búsqueda -->
+											<div id="search-results"></div>
+												
+												<style>
+													/* Estilos para la barra de búsqueda */
+	
+													#head-container {
+														display: flex;
+														flex-direction: row;
+														align-items: center;
+														padding: 10px;
+	
+													}
+	
+													#home-title{
+														margin-right: 10px;
+													}
+	
+													#search-form {
+														flex-grow: 1;
+														display: flex;
+														flex-direction: row;
+														align-items: center;
+														padding: 1px;
+														border: 1px solid #ccc;
+														border-radius: 2px;
+														box-shadow: 0 0 5px  rgba(101, 99, 99, 0.1);
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size:16px;
+														}
+		
+														#search-input {
+															flex-grow: 1;
+															padding: 10px;
+															border: none;
+															border-radius: 5px;
+															font-size: 10px;
+															}
+		
+															#search-input {
+																flex-grow: 1;
+																padding: 10px;
+																border: none;
+																border-radius: 5px;
+																font-size: 16px;
+																}
+		
+																#search-input {
+																flex-grow: 1;
+																padding: 10px;
+																border: none;
+																border-radius: 1px;
+																font-size: 16px;
+																}
+		
+																#search-button {
+																padding: 10px 15px;
+																border: none;
+																border-radius: 5px;
+																background-color: #1e9da4;
+																color: #fff;
+																cursor: context-menu;
+																}
+		
+																#search-button:hover {
+																background-color: #3e7b8e;
+																}
+		
+																#search-results {
+																padding: 10px;
+																}
+															
+		
+																</style>
+		
+																<script>
+																	// Obtener los elementos del formulario y el contenedor de resultados
+																	const searchForm = document.getElementById('search-form');
+																	const searchInput = document.getElementById('search-input');
+																	const searchButton = document.getElementById('search-button');
+																	const searchResults = document.getElementById('search-results');
+		
+		
+																 // Crear un objeto que mapee los temas con sus respectivas páginas
+																	const themePages = {
+																	'Arte': 'Arte.html',
+																	'Astronomia': 'Astronomía.html',
+																	'Dibujo': 'Dibujo.html',
+																	'Canto': 'Canto.html',
+																	'Musica': 'Musica.html',
+																	'Artes Plasticas': 'ArtesPlasticas.html',
+																	'Causas de guerra': 'causasGuerra.html',
+																	'Carrera sobre informatica': 'CarrerasInfo.html',
+																	'Concepto filosofico de las guerras': 'ConceptoFilosofico.html',
+																	'Benjamin Britten': 'benjaminBritten.html',
+																	'Biologia': 'Biologia.html',
+																	'Ciencias Naturales': 'CienciasNaturales.html',
+																	'Ciencias Sociales': 'cienciasSociales.html',
+																	'Doctrinas Politicas': 'DoctrinasPoliticas.html',
+																	'Economia': 'Economia.html',
+																	'Etimologia': 'EtimologiaPolitica.html',
+																	'Epistemologia de la geografia': 'Epistemologia.html',
+																	'Erizo': 'erizo.html',
+																	'Estudio de la religion': 'Estudio-de-la-Religion.html',
+																	'Zorro Fennec': 'Fennec.html',
+																	'Filosofia de la religion': 'Filosofia-de-la-Religion.html',
+																	'Filosofia de la historia': 'Filosofia-de-laHistoria.html',
+																	'Fisica': 'Fisica.html',
+																	'Francisco Morazan': 'Francisco-Morazan.html',
+																	'Funciones de la tecnologia': 'Funciones.html',
+																	'Funciones de la informatica': 'FuncionesInfo.html',
+																	'Geografia': 'Gegografia.html',
+																	'Geografia en sociales': 'geografia-de-sociales.html',
+																	'Geografia contemporanea': 'geografiaContemporanea.html',
+																	'Geografia general': 'GeografiaGeneral.html',
+																	'Geografia de Honduras': 'GeografiaHonduras.html',
+																	'Guerra de Israel y Gaza': 'Guerra-Israel-Gaza.html',
+																	'Guerras': 'guerras.html',
+																	'Guerras existentes': 'GuerrasHabidas.html',
+																	'Historia de Honduras': 'Historia-de-Honduras.html',
+																	'Historia': 'Historia.html',
+																	'Historiador': 'Historiador.html',
+																	'Historia de la informatica': 'HistoriaInfo.html',
+																	'Historia Politica': 'HistoriaPolitica.html',
+																	'Impacto de las guerras': 'Impacto.html',
+																	'Impacto de la tecnologia': 'impcto.html',
+																	'Informatica': 'Informatica.html',
+																	'Linguistica': 'Linguistica.html',
+																	'Listado de religiones': 'Lista-de-Religiones.html',
+																	'Metodos de la tecnologia': 'metodos.html',
+																	'Mike Cubbage': 'Mike-Cubbage.html',
+																	'Origenes de la informatica': 'OrigenesInfo.html',
+																	'Politica': 'Politica.html',
+																	'Psicologia': 'psicologia.html',
+																	'Quimica': 'Quimica.html',
+																	'Ramas de la historia': 'Ramas-de-la-Historia.html',
+																	'Religion': 'Religion.html',
+																	'Sistemas politicos': 'SistemasPoliticos.html',
+																	'Suricata': 'suricata.html',
+																	'Tecnologia': 'Tecnologia.html',
+																	'Tipos de religiones': 'Tipos-de-religion.html',
+																	'Tipos de tecnologias': 'Tipos-deTecnologia.html',
+	
+																	// Agregar más temas y páginas aquí
+																	//aquí es donde agregamos las paginas que queremos que el buscador encuentre
+																	};
+		
+																	// Agregar un evento de submit al formulario
+																	searchForm.addEventListener('submit', (e) => {
+																	e.preventDefault();
+																	const searchTerm = searchInput.value.trim();
+																	const page = themePages[searchTerm];
+																	if (page) {
+																	 // Redirigir a la página correspondiente
+																	window.location.href = page;
+																	} else {
+																  // Mostrar un mensaje de error si no se encuentra la página
+																	searchResults.innerHTML = "No se encontró una página para" ({searchTerm});
+																	}
+																});
+														</script>
+										
+
+		      <!-- Aqui podes poner el codigo para el buscador para que salga en la barra de arriba a la par de Home -->
+
+									</nav>
+								</header>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			<!-- Main -->
+				<div id="main">
+					<div class="container">
+						<div class="row main-row">
+							<div class="col-3 col-12-medium">
+
+								<section>
+									<h2>Otros temas sobre la Guerra</h2>
+									<ul class="link-list">
+										<li><a href="causasGuerra.html">Causas</a></li>
+										<li><a href="ConceptoFilosofico.html">Concepto Filosofico</a></li>
+										<li><a href="Impacto.html">Impacto</a></li>
+										<li><a href="GuerrasHabidas.html">Guerras</a></li>
+									</ul>
+								</section>
+
+								<section>
+									<h2>Dato curioso</h2>
+									<p>Durante la Primera Guerra Mundial, se produjeron "tríceps" inusuales y 
+                                        breves momentos de tregua conocida como la "Tregua de Navidad" en 1914.
+                                        Durante esta tregua, soldados de ambos bandos en el Frente Occidental, 
+                                        que normalmente se enfrentaban en combates intensos, se reunieron en 
+                                        varias ubicaciones para intercambiar regalos, cantar villancicos y 
+                                        jugar al fútbol. Esta tregua no fue oficial y, a menudo, fue reprimida 
+                                        rápidamente por los altos mandos militares, pero es un recordatorio 
+                                        fascinante de cómo incluso en tiempos de conflicto, hay momentos de 
+                                        humanidad y camaradería.</p>
+								</section>
+
+							</div>
+							<div class="col-6 col-12-medium imp-medium">
+
+								<section class="middle-content">
+									<h2><strong>Guerra</strong></h2>
+									<p>La guerra o conflicto bélico, estrictamente hablando, es aquel conflicto sociopolítico en el que dos o más grupos humanos relativamente masivos —principalmente tribus, sociedades o naciones— se enfrentan de manera violenta, generalmente mediante el uso de armas de toda índole, a menudo con resultado de muerte —individual o colectiva— y daños materiales de una entidad considerable.</p>
+                                    <p>La guerra es la forma de conflicto sociopolítico más grave entre dos o más grupos humanos. Se da tanto en sociedades tribales como en civilizadas, pero es más grave entre estas últimas ya que son más complejas, masificadas y tecnificadas. Es quizás la más antigua de las relaciones internacionales y ya en el comienzo de las civilizaciones se constata el enfrentamiento organizado de grupos humanos armados con el propósito de controlar recursos naturales o humanos (conflictos entre cazadores nómadas y recolectores sedentarios que sí desarrollaron el concepto de propiedad),3​ exigir un desarme o imponer algún tipo de tributo, ideología, nacionalidad o religión, sometiendo, despojando y, en su caso, destruyendo al enemigo. Es más, este tipo de conducta gregaria es extensible a la mayor parte de los homínidos4​ y se encuentra estrechamente relacionado con el concepto etológico de territorialidad.</p>
+                                    <p>Las guerras tienen como origen múltiples causas, entre las que suelen estar el mantenimiento o el cambio de relaciones de poder, dirimir disputas económicas, ideológicas, territoriales (por cuestiones históricas y estratégicas), religiosas, etc. (muchas veces una combinación de causas).</p>
+                                    <p>En ciencia política y relaciones internacionales, la guerra es un instrumento político, al servicio de un Estado u otra organización con fines eminentemente políticos, ya que en caso contrario constituiría una forma más desorganizada aunque igualmente violenta: el bandolerismo por tierra o la piratería por mar. En las sociedades primitivas tribales su origen aparece más claro; deriva de dos elementos: la presión demográfica y la escasez de recursos.</p>
+									<p>Según Richard Holmes, la guerra es una experiencia universal que comparten todos los países y todas las culturas.6​ Según Sun Tzu, «La guerra es el mayor conflicto de Estado, la base de la vida y la muerte, el Tao de la supervivencia y la extinción. Por lo tanto, es imperativo estudiarla profundamente».7​ Por demás, la forma más astuta de ejercerla sería soslayarla de manera que no hubiera necesidad de llegar a ella. Según Carl von Clausewitz, la guerra es «la continuación de la política por otros medios».</p>
+                                    <p>Las reglas de la guerra, y la existencia misma de reglas, han variado mucho a lo largo de la historia. El concepto de quiénes son los combatientes también varía con el grado de organización de las sociedades enfrentadas. Las dos posibilidades más frecuentes son civiles sacados de la población general, generalmente varones jóvenes, en caso de conflicto, o soldados profesionales formando ejércitos permanentes. También puede haber voluntarios y mercenarios. Las combinaciones de varios o de todos estos tipos de militares son asimismo frecuentes.</p>
+									<p>Las formas de hacer una guerra dependen de los propósitos de los combatientes. Por ejemplo, en las guerras romanas, cuyo objetivo era expandir el imperio, el objetivo militar principal era, una vez sometido, incorporar al pueblo ajeno al imperio y a las leyes y costumbres de Roma.9​ En la actualidad, a veces se hace distinción entre conflictos armados y guerras. De acuerdo con este punto de vista, un conflicto solo sería una guerra si los beligerantes han hecho una declaración formal de la misma. En una concepción de la doctrina militar de Estados Unidos no se hace distinción alguna, refiriéndose a los conflictos armados como guerras de cuarta generación.</p>
+                                    <p>Entre el final de la Segunda Guerra Mundial y 2010 hubo 246 enfrentamientos armados en 151 lugares del mundo.</p>
+                                    </section>
+
+							</div>
+							<div class="col-3 col-12-medium">
+
+								<section>
+									<h2>Imagenes</h2>
+									<ul class="medium-image-list">
+										<li>
+											<a><img src="images/guerra.jpg" alt=""  height="229" class="left" /></a>
+										</li>
+										<li>
+											<a><img src="images/guerra2.jpg" alt="" height="222" class="left" /></a>
+										</li>
+                                        <li>
+											<a><img src="images/guerra3.jpg" alt="" height="240" class="left" /></a>
+										</li>
+                                        <li>
+											<a><img src="images/guerra4.jpg" alt="" height="205" class="left" /></a>
+										</li>
+                                        <li>
+											<a><img src="images/guerra5.jpg" alt="" height="210" class="left" /></a>
+										</li>
+                                        <li>
+											<a><img src="images/guerra6.jpg" alt="" height="200" class="left" /></a>
+										</li>
+									</ul>
+								</section>
+								    <p>
+									<p>
+									<p>
+								    <p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+			
+							</div>
+						</div>
+					</div>
+				</div>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
